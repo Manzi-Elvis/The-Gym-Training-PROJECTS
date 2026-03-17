@@ -34,3 +34,17 @@ a{
     margin-right: auto;
     margin-left: auto;
 }
+#services-btn{
+      background-color: #a4c639;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 20px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      
+}
+#services-btn:hover {
+      color: #a4c639;
+      background-color: white;
+}
