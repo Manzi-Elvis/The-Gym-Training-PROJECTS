@@ -1,0 +1,21 @@
+.row{
+      display: flex;
+      flex-wrap: wrap;
+      margin-right: -15px;
+      margin-left: -15px;
+}
+.right-icons{
+      float: right;
+      display: flex;
+      justify-content: flex-end;
+      gap: 30px;
+}
+.left-info{
+      display: flex;
+      gap: 30px;
+}
+a{
+      text-decoration: none;
+      color: white;
+      
+}
