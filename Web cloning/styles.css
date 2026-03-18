@@ -83,3 +83,11 @@ button {
   cursor: pointer;
   font-weight: bold;
 }
+
+.socials i {
+  margin-left: 15px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 300;
+  gap: 2rem;
+}
