@@ -55,3 +55,12 @@ a{
       color: #a4c639;
       background-color: white;
 }
+
+.services{
+      display: flex;
+      gap: 30px;
+      padding: 15px;
+      background-image:url("./assets/img1.jpg");
+      background-size: cover;
+      background-position: center;
+}
