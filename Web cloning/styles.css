@@ -12,6 +12,7 @@
   justify-content: space-between;
   padding: 10px 40px;
   font-size: 14px;
+  font-weight: bold;
 }
 
 .navbar {
@@ -22,6 +23,11 @@
   width: 100%;
   color: white;
   z-index: 10;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .navbar ul {
@@ -89,6 +95,6 @@ button {
   margin-left: 15px;
   cursor: pointer;
   font-size: 18px;
-  font-weight: 300;
+  font-weight: bold;
   gap: 2rem;
 }
