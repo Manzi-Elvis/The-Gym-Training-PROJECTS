@@ -64,3 +64,9 @@ a{
       background-size: cover;
       background-position: center;
 }
+
+.navbar{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+}
