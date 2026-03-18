@@ -136,3 +136,65 @@ button {
   font-weight: bold;
   gap: 2rem;
 }
+
+/* CTA SECTION */
+.cta {
+  background: #9bc53d;
+  padding: 40px 60px;
+  color: white;
+  margin-top: -5px;
+}
+
+.cta-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cta-text h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.cta-text p {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.cta-btn {
+  background: transparent;
+  border: 2px solid white;
+  padding: 12px 25px;
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta-btn:hover {
+  background: white;
+  color: #9bc53d;
+}
+
+/* SERVICES SECTION */
+.services {
+  text-align: center;
+  padding: 80px 20px;
+  background: #f5f5f5;
+}
+
+.services h2 {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.services span {
+  color: #9bc53d;
+}
+
+.services p {
+  color: gray;
+  letter-spacing: 2px;
+  font-size: 14px;
+}
