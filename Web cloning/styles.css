@@ -61,6 +61,27 @@
   border-bottom: 2px solid #9bc53d;
 }
 
+.navbar.scrolled {
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar.scrolled .logo {
+  color: #9bc53d;
+}
+
+.navbar.scrolled ul li {
+  color: black;
+}
+
+.navbar.scrolled ul li:hover {
+  color: #9bc53d;
+}
+
+.navbar.scrolled ul li:hover::after {
+  width: 100%;
+}
+
 .hero {
   height: 100vh;
   background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f') center/cover no-repeat;
