@@ -22,7 +22,8 @@
   position: absolute;
   width: 100%;
   color: white;
-  z-index: 10;
+  z-index: 1000;
+  transition: all 0.3s ease;
 }
 
 .logo {
@@ -38,6 +39,22 @@
 
 .navbar li {
   cursor: pointer;
+}
+
+.navbar ul li:hover {
+  color: #9bc53d;
+  border-bottom: 2px solid #9bc53d;
+}
+
+.navbar ul li::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #9bc53d;
+  transition: width 0.3s;
 }
 
 .navbar .active {
