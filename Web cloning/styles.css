@@ -1,72 +1,85 @@
-body {
-	margin: 0;
-      padding: 0;
-      margin-bottom: 15px;
-      margin-top: 8px;
-	background: #77b;
-}
-.row{
-      display: flex;
-      flex-wrap: wrap;
-      margin-right: -15px;
-      margin-left: -15px;
-}
-.right-icons{
-      float: right;
-      display: flex;
-      justify-content: flex-end;
-      gap: 30px;
-      padding: 15px;
-}
-.left-info{
-      display: flex;
-      gap: 30px;
-}
-a{
-      text-decoration: none;
-      color: white;
-      
-}
-#left-info{
-      width: 100%;
-      padding-right: 15px;
-      padding-left: 15px;
-      margin-right: auto;
-      margin-left: auto;
-}
-.container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
-#services-btn{
-      background-color: #a4c639;
-      border: none;
-      border-radius: 30px;
-      padding: 10px 20px;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      
-}
-#services-btn:hover {
-      color: #a4c639;
-      background-color: white;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-.services{
-      display: flex;
-      gap: 30px;
-      padding: 15px;
-      background-image:url("./assets/img1.jpg");
-      background-size: cover;
-      background-position: center;
+.topbar {
+  background: #9bc53d;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 40px;
+  font-size: 14px;
 }
 
-.navbar{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  position: absolute;
+  width: 100%;
+  color: white;
+  z-index: 10;
+}
+
+.navbar ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+
+.navbar li {
+  cursor: pointer;
+}
+
+.navbar .active {
+  border-bottom: 2px solid #9bc53d;
+}
+
+.hero {
+  height: 100vh;
+  background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f') center/cover no-repeat;
+  position: relative;
+  color: white;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50px;
+  transform: translateY(-50%);
+  max-width: 600px;
+}
+
+.content h4 {
+  color: #9bc53d;
+  margin-bottom: 10px;
+}
+
+.content h1 {
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+.content p {
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+button {
+  background: #9bc53d;
+  border: none;
+  padding: 12px 25px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
 }
