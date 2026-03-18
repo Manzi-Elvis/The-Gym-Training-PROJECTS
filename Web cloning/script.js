@@ -16,4 +16,12 @@ document.querySelector("button").addEventListener("click", () => {
   alert("This is a demo website. Services are not available.");
 });
 
-document.querySelector()
+window.addEventListener("scroll", () => {
+  const navbar = document.querySelector(".navbar");
+
+  if (window.scrollY > 50) {
+    navbar.classList.add("scrolled");
+  } else {
+    navbar.classList.remove("scrolled");
+  }
+});
