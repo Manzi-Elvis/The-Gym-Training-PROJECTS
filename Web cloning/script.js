@@ -6,16 +6,6 @@ document.querySelectorAll(".navbar li").forEach(item => {
   });
 });
 
-document.querySelectorAll(".socials i").forEach(item => {
-  item.addEventListener("click", () => {
-    alert("This is a demo website. Social media links are not available.");
-  });
-});
-
-document.querySelector("button").addEventListener("click", () => {
-  alert("This is a demo website. Services are not available.");
-});
-
 window.addEventListener("scroll", () => {
   const navbar = document.querySelector(".navbar");
 
