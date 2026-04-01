@@ -60,3 +60,27 @@ facebookProfile.addFriend();
 facebookProfile.removeFriend();
 
 console.log(facebookProfile);
+
+/*
+Thanks for completing that!
+
+What Went Well
+- Your code should have a variable `facebookProfile`
+- The variable `facebookProfile` should be an object
+- Your `facebookProfile` object should have a `name` property
+- Your `facebookProfile` object should have a `friends` property
+- Your `facebookProfile` object should have a `messages` property
+- Your object's `name` property should be string
+- Your object's `friends` property should be a number
+- Your object's `messages` property should be an array
+- Your `facebookProfile` object should have a `postMessage()` method
+- Your `facebookProfile` object should have a `deleteMessage()` method
+- Your `facebookProfile` object should have a `addFriend()` method
+- Your `facebookProfile` object should have a `removeFriend()` method
+- Your object's `postMessage()` method should add messages to the `messages` array
+- Your object's `deleteMessage()` method should remove messages from the `messages` array
+- Your object's `addFriend()` method should increment the `friends` variable
+- Your object's `removeFriend()` method should decrement the `friends` variable
+Feedback
+Your answer passed all our tests! Awesome job!
+*/
