@@ -24,3 +24,12 @@ body {
   height: 100%;
   background: rgba(0,0,0,0.5);
 }
+
+.modal {
+  position: fixed;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 10;
+}
