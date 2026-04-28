@@ -7,14 +7,16 @@ incrementBtn.style.backgroundColor = "green";
 decrementBtn.style.backgroundColor = "red";
 resetBtn.style.backgroundColor = "black";
 
-if (countEl.textContent === "0") {
-  countEl.style.color = "black";
-}
-else if (countEl.textContent > "0") {
-  countEl.style.color = "green";
-}
-else {  
-  countEl.style.color = "red";
+function updateColor(){
+      if (countEl.textContent === "0") {
+            countEl.style.color = "black";
+      }
+      else if (countEl.textContent > "0") {
+            countEl.style.color = "green";
+      }
+      else {  
+            countEl.style.color = "red";
+      }
 }
 
 let count = 0;
@@ -22,14 +24,17 @@ let count = 0;
 incrementBtn.addEventListener("click", () => {
   count++;
   countEl.textContent = count;
+  updateColor();
 });
 
 decrementBtn.addEventListener("click", () => {
   count--;
   countEl.textContent = count;
+  updateColor();
 });
 
 resetBtn.addEventListener("click" , () => {
       count = 0;
       countEl.textContent = count;
+      updateColor();
 })
