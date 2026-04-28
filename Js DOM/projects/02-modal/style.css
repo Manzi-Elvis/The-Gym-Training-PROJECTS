@@ -33,3 +33,7 @@ body {
   text-align: center;
   z-index: 10;
 }
+
+.hidden {
+  display: none;
+}
