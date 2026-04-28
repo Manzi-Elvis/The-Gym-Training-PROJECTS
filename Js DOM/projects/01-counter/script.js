@@ -9,7 +9,7 @@ resetBtn.style.backgroundColor = "black";
 
 function updateColor(){
       if (countEl.textContent === "0") {
-            countEl.style.color = "black";
+            countEl.style.color = "blue";
       }
       else if (countEl.textContent > "0") {
             countEl.style.color = "green";
