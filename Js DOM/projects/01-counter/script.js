@@ -5,7 +5,7 @@ const resetBtn = document.getElementById("reset");
 
 incrementBtn.style.backgroundColor = "green";
 decrementBtn.style.backgroundColor = "red";
-resetBtn.style.backgroundColor = "white";
+resetBtn.style.backgroundColor = "black";
 
 if (countEl.textContent === "0") {
   countEl.style.color = "black";
