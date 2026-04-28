@@ -8,3 +8,40 @@ body {
     align-items: center;
     height: 100vh;
 }
+
+.container {
+    text-align: center;
+    background: #222;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+h1 {
+    margin: 0 0 20px;
+}
+
+button {
+    font-size: 20px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #555;
+    color: white;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #777;
+}
+
+button:active {
+    background: #999;
+}
+
+#counter {
+    display: block;
+    font-size: 40px;
+    margin: 20px 0;
+}
