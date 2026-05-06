@@ -31,12 +31,17 @@ body{
 }
 
 .tab-btn.active{
-      display: none;
-      background: #333;
-      padding: 20px;
-      border-radius: 8px;
+      background: white;
+      color: #111;
 }
 
 .tab-content.active{
       display: block;
+}
+
+.tab-content{
+      display: none;
+      background: #333;
+      padding: 20px;
+      border-radius: 8px;
 }
