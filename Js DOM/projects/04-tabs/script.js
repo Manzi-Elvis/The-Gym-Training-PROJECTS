@@ -9,7 +9,7 @@ tabButtons.forEach((button) => {
                   btn.classList.remove("active")
             });
 
-            tabContents.forEach((content) => {
+            tabContent.forEach((content) => {
                   content.classList.remove("active")
             });
             
