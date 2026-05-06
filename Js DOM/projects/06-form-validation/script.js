@@ -105,4 +105,18 @@ togglePassword.addEventListener("click" , () => {
       password.type = isHidden ? "text" : "password";
       consfirmPassword.type = isHidden ? "text" : "password";
       togglePassword.textContent = isHidden ? "Hide" : "Show"
-})
+});
+
+confirmPassword.addEventListener("input", validateConfirmPassword)
+terms.addEventListener("change", validateTerms);
+
+form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const isFormValid = validateName() && validateEmail() && validatePassword() && validateConfirmPassword() && validateTerms();
+
+      if(isFormValid){
+            successMessage.textContent = "Account created successfully!";
+            form.reset();
+      }
+});
