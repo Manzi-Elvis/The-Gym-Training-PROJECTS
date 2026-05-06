@@ -59,7 +59,7 @@ function checkPasswordStrength(){
       if(/[0-9]/.test(value)) strength++;
       if(/[^A-Za-z0-9]/.test(value)) strength++;
 
-      const widths = ["0%" , "25%" , "75%" , "100%"];
+      const widths = ["0%" , "25%" , "50%" , "75%" , "100%"];
       strengthbar.style.width = widths[strength];
 
       return strength;
