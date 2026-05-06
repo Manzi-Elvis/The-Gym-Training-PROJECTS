@@ -3,11 +3,11 @@ const form = document.getElementById("signupForm");
 const fullName = document.getElementById("fullName");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
-const confirmPassword = document.getElememtById("confirmPassword")
+const confirmPassword = document.getElementById("confirmPassword")
 const terms = document.getElementById("terms");
 
-const togglePassord = document.getElementById("togglePassword");
-const strengthbar = document.getElementById(".strength span");
+const togglePassword = document.getElementById("togglePassword");
+const strengthbar = document.querySelector(".strength span");
 const successMessage = document.getElementById("successMessage")
 
 function setError(input, message){
@@ -29,7 +29,7 @@ function setSuccess(input){
 }
 
 function validateName(){
-      if(fullName.ariaValueMax.trim().length < 3){
+      if(fullName.value.trim().length < 3){
             setError(fullName, "Name must be atleast 3 characters");
             return false;
       }
@@ -39,9 +39,9 @@ function validateName(){
 }
 
 function validateEmail(){
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailPattern = "/^[^\s@]+@[^\s@]+\.[^\s@]+$/";
 
-      if(!emailPattern.test(email.ariaValueMax.trim())){
+      if(!emailPattern.test(email.value.trim())){
             setError(email, "Enter a valid email address")
             return false
       }
@@ -103,7 +103,7 @@ togglePassword.addEventListener("click" , () => {
       const isHidden = password.type === "password";
 
       password.type = isHidden ? "text" : "password";
-      consfirmPassword.type = isHidden ? "text" : "password";
+      confirmPassword.type = isHidden ? "text" : "password";
       togglePassword.textContent = isHidden ? "Hide" : "Show"
 });
 
