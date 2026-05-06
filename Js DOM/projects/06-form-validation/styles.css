@@ -1,0 +1,118 @@
+body{
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #111827, #1e293b);
+      color: white;
+}
+
+.page{
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+.form-card{
+      width: 380px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 30px;
+      border-radius: 18px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+.subtitle{
+      color: #cbd5e1;
+}
+
+.field{
+      margin-top: 18px;
+}
+
+label{
+      display: block;
+      margin-bottom: 6px;
+}
+
+input{
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 2px solid transparent;
+      outline: none;
+      box-sizing: border-box;
+}
+
+input.valid{
+      border-color: #22c55e;
+}
+
+input.invalid{
+      border-color: #ef4444;
+}
+
+.error{
+      color: #f87171;
+      font-size: 0.8rem;
+      display: block;
+      margin-top: 5px;
+      min-height: 18px;
+}
+
+.password-box{
+      display: flex;
+      gap: 8px;
+}
+
+.password-box input{
+      flex: 1;
+}
+
+.password-box button{
+      border: none;
+      border-radius: 10px;
+      padding: 0 12px;
+      cursor: pointer;
+}
+
+.strength{
+      height: 8px;
+      background: #334155;
+      border-radius: 999px;
+      margin-top: 8px;
+      overflow: hidden;
+}
+
+.strength span{
+      display: block;
+      height: 100%;
+      width: 0%;
+      transition: 0.3s ease;
+}
+
+.terms{
+      display: flex;
+      gap: 8px;
+      margin-top: 18px;
+      align-items: center;
+}
+
+.terms input{
+      width: auto;
+}
+
+.submit-btn{
+      width: 100%;
+      margin-top: 20px;
+      padding: 13px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+}
+
+#successMessage{
+      color: #22c55e;
+      text-align: center;
+      font-weight: bold;
+}
