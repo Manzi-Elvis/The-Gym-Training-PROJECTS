@@ -1,0 +1,35 @@
+body{
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      display: flex;
+      justify-content: center;
+      padding-top: 60px;
+}
+
+.slider{
+      width: 500px;
+      text-align: center;
+      background: #222;
+      padding: 25px;
+      border-radius: 12px;
+}
+
+#sliderImage{
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+}
+
+.buttons{
+      margin-top: 20px;
+}
+
+button{
+      padding: 10px 15px;
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+}
