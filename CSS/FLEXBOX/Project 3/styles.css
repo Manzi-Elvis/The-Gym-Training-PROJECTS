@@ -1,0 +1,31 @@
+body{
+      margin: 0;
+      font-family: Arial, sans-serif;
+}
+
+.container{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: #222;
+}
+
+.list{
+      list-style: none;
+      gap: 20px;
+      display: flex;
+      color: aliceblue;
+      margin: 0;
+      padding: 0;
+}
+
+li a{
+      text-decoration: none;
+      color: aliceblue;
+      cursor: pointer;
+      transition: color 0.3s ease;
+}
+.list a:hover {
+  color: tomato;
+}
