@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  background: tomato;
+  margin: 10px;
+  border-radius: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: aliceblue;
+  font-weight: 24px;
+  font-size:xx-large;
+}
