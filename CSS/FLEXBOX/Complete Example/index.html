@@ -1,53 +1,947 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flexbox Mastery Demo</title>
   <style>
-
-    body{
-      margin:0;
-      font-family:Arial;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    .container{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:20px;
-
-      padding:20px;
-      background:#222;
+    :root {
+      --bg: #070b18;
+      --card: rgba(255, 255, 255, 0.08);
+      --card-strong: rgba(255, 255, 255, 0.13);
+      --border: rgba(255, 255, 255, 0.16);
+      --text: #eef4ff;
+      --muted: #aab8d4;
+      --accent: #6ee7ff;
+      --accent-2: #a78bfa;
+      --success: #4ade80;
+      --warning: #facc15;
+      --danger: #fb7185;
+      --radius: 22px;
     }
 
-    .box{
-      width:150px;
-      height:150px;
-      background:steelblue;
-      color:white;
-
-      display:flex;
-      justify-content:center;
-      align-items:center;
-
-      font-size:24px;
-      border-radius:10px;
+    body {
+      min-height: 100vh;
+      font-family: Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(110, 231, 255, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(167, 139, 250, 0.2), transparent 26%),
+        linear-gradient(135deg, #070b18, #0c1024 45%, #050712);
+      color: var(--text);
+      line-height: 1.6;
     }
 
+    .page {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+      padding: 30px 0 70px;
+    }
+
+    .hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .hero-content {
+      flex: 1 1 520px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .badge {
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--card);
+      color: var(--accent);
+      font-size: 14px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 20px var(--success);
+    }
+
+    h1 {
+      font-size: clamp(42px, 8vw, 88px);
+      line-height: 0.95;
+      letter-spacing: -4px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      border: 0;
+      cursor: pointer;
+      padding: 13px 18px;
+      border-radius: 14px;
+      color: var(--text);
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      font-weight: 800;
+      box-shadow: 0 15px 35px rgba(37, 99, 235, 0.25);
+    }
+
+    .btn.secondary {
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
+
+    .hero-visual {
+      flex: 1 1 360px;
+      min-height: 360px;
+      border: 1px solid var(--border);
+      border-radius: 35px;
+      background: var(--card);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 25px;
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.4);
+    }
+
+    .mini-browser {
+      width: 100%;
+      max-width: 430px;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .browser-top {
+      display: flex;
+      gap: 8px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .browser-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--danger);
+    }
+
+    .browser-dot:nth-child(2) { background: var(--warning); }
+    .browser-dot:nth-child(3) { background: var(--success); }
+
+    .browser-body {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .browser-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .browser-card {
+      flex: 1;
+      height: 70px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(110, 231, 255, 0.28), rgba(167, 139, 250, 0.24));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 900;
+    }
+
+    .section {
+      margin-top: 28px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+      backdrop-filter: blur(16px);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .section h2 {
+      font-size: clamp(26px, 4vw, 44px);
+      letter-spacing: -1px;
+    }
+
+    .section-header p {
+      max-width: 600px;
+      color: var(--muted);
+    }
+
+    .concept-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .concept-card {
+      flex: 1 1 260px;
+      min-height: 190px;
+      padding: 20px;
+      border-radius: 20px;
+      background: var(--card-strong);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .concept-card h3 {
+      color: var(--accent);
+      font-size: 22px;
+    }
+
+    code {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.35);
+      color: #d8b4fe;
+      font-size: 14px;
+    }
+
+    .live-lab {
+      display: flex;
+      gap: 24px;
+      align-items: stretch;
+      flex-wrap: wrap;
+    }
+
+    .controls {
+      flex: 1 1 300px;
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.24);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    label {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    select, input[type="range"] {
+      width: 100%;
+    }
+
+    select {
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #11172e;
+      color: var(--text);
+    }
+
+    .demo-stage-wrap {
+      flex: 2 1 540px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .demo-stage {
+      min-height: 390px;
+      padding: 18px;
+      border: 2px dashed rgba(110, 231, 255, 0.35);
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.28);
+      display: flex;
+      transition: 0.25s ease;
+    }
+
+    .item {
+      width: 90px;
+      height: 90px;
+      border-radius: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 28px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #06b6d4, #8b5cf6);
+      box-shadow: 0 15px 35px rgba(6, 182, 212, 0.18);
+      flex-shrink: 1;
+    }
+
+    .item:nth-child(2) {
+      background: linear-gradient(135deg, #f97316, #ec4899);
+    }
+
+    .item:nth-child(3) {
+      background: linear-gradient(135deg, #22c55e, #14b8a6);
+    }
+
+    .item:nth-child(4) {
+      background: linear-gradient(135deg, #facc15, #fb7185);
+    }
+
+    .css-output {
+      padding: 18px;
+      border-radius: 16px;
+      background: #030712;
+      border: 1px solid var(--border);
+      color: #bae6fd;
+      overflow-x: auto;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+
+    .real-examples {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .example-box {
+      padding: 22px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: rgba(0, 0, 0, 0.22);
+    }
+
+    .example-box h3 {
+      margin-bottom: 14px;
+      color: var(--accent);
+    }
+
+    .navbar-demo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      padding: 16px;
+      border-radius: 16px;
+      background: #11172e;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #020617;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .dashboard-demo {
+      min-height: 320px;
+      display: flex;
+      gap: 18px;
+    }
+
+    .sidebar {
+      width: 230px;
+      flex-shrink: 0;
+      border-radius: 18px;
+      padding: 18px;
+      background: #11172e;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .side-link {
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .dashboard-main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .stat-card {
+      flex: 1 1 160px;
+      min-height: 100px;
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.09);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .content-panel {
+      flex-grow: 1;
+      border-radius: 18px;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.07);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--muted);
+    }
+
+    .pricing-demo {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: stretch;
+    }
+
+    .price-card {
+      flex: 1 1 230px;
+      min-height: 280px;
+      padding: 22px;
+      border-radius: 20px;
+      background: #11172e;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .price-card.featured {
+      transform: translateY(-10px);
+      border-color: rgba(110, 231, 255, 0.7);
+    }
+
+    .price-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      color: var(--muted);
+    }
+
+    .price-card button {
+      margin-top: auto;
+    }
+
+    .wrap-demo {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .pill {
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: rgba(110, 231, 255, 0.14);
+      border: 1px solid rgba(110, 231, 255, 0.22);
+    }
+
+    .challenge {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .challenge-card {
+      flex: 1 1 240px;
+      padding: 20px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--card-strong);
+    }
+
+    .challenge-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .footer {
+      margin-top: 32px;
+      padding: 26px;
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: var(--muted);
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        min-height: auto;
+        padding-top: 30px;
+        flex-direction: column;
+      }
+
+      .hero-visual {
+        width: 100%;
+      }
+
+      .section {
+        padding: 20px;
+      }
+
+      .section-header {
+        flex-direction: column;
+      }
+
+      .dashboard-demo {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+    }
   </style>
 </head>
 <body>
+  <main class="page">
+    <section class="hero">
+      <div class="hero-content">
+        <div class="badge"><span class="dot"></span> Interactive CSS Flexbox Lab</div>
+        <h1>Master <span class="gradient-text">Flexbox</span> by Seeing It Move</h1>
+        <p>
+          This project demonstrates display flex, flex-direction, justify-content,
+          align-items, align-self, flex-wrap, gap, flex-grow, and flex-shrink using
+          live controls and real UI examples.
+        </p>
+        <div class="hero-actions">
+          <a href="#lab"><button class="btn">Open Live Lab</button></a>
+          <a href="#examples"><button class="btn secondary">See Real Examples</button></a>
+        </div>
+      </div>
 
-  <div class="container">
+      <div class="hero-visual">
+        <div class="mini-browser">
+          <div class="browser-top">
+            <span class="browser-dot"></span>
+            <span class="browser-dot"></span>
+            <span class="browser-dot"></span>
+          </div>
+          <div class="browser-body">
+            <div class="browser-row">
+              <div class="browser-card">1</div>
+              <div class="browser-card">2</div>
+              <div class="browser-card">3</div>
+            </div>
+            <div class="browser-row">
+              <div class="browser-card">Grow</div>
+              <div class="browser-card">Wrap</div>
+            </div>
+            <div class="browser-row">
+              <div class="browser-card">Align</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="box">1</div>
-    <div class="box">2</div>
-    <div class="box">3</div>
-    <div class="box">4</div>
-    <div class="box">5</div>
-    <div class="box">6</div>
-    <div class="box">7</div>
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <h2>Flexbox Concepts</h2>
+          <p>Each concept controls either the parent container or the child items.</p>
+        </div>
+      </div>
 
-  </div>
+      <div class="concept-grid">
+        <article class="concept-card">
+          <h3>display: flex</h3>
+          <p>Turns the parent into a flex container. Direct children become flex items.</p>
+          <code>.container { display: flex; }</code>
+        </article>
 
+        <article class="concept-card">
+          <h3>flex-direction</h3>
+          <p>Chooses the main axis: row, column, row-reverse, or column-reverse.</p>
+          <code>flex-direction: row;</code>
+        </article>
+
+        <article class="concept-card">
+          <h3>justify-content</h3>
+          <p>Moves items along the main axis.</p>
+          <code>justify-content: center;</code>
+        </article>
+
+        <article class="concept-card">
+          <h3>align-items</h3>
+          <p>Moves items along the cross axis.</p>
+          <code>align-items: center;</code>
+        </article>
+
+        <article class="concept-card">
+          <h3>align-self</h3>
+          <p>Lets one child ignore the parent's alignment.</p>
+          <code>.item { align-self: flex-end; }</code>
+        </article>
+
+        <article class="concept-card">
+          <h3>flex-wrap + gap</h3>
+          <p>Allows items to move to the next line and creates clean spacing.</p>
+          <code>flex-wrap: wrap; gap: 20px;</code>
+        </article>
+
+        <article class="concept-card">
+          <h3>flex-grow</h3>
+          <p>Controls how much an item expands when there is extra space.</p>
+          <code>flex-grow: 1;</code>
+        </article>
+
+        <article class="concept-card">
+          <h3>flex-shrink</h3>
+          <p>Controls how much an item shrinks when space is tight.</p>
+          <code>flex-shrink: 0;</code>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="lab">
+      <div class="section-header">
+        <div>
+          <h2>Live Flexbox Lab</h2>
+          <p>Change the controls and watch the flex container update instantly.</p>
+        </div>
+      </div>
+
+      <div class="live-lab">
+        <div class="controls">
+          <div class="control-group">
+            <label for="direction">flex-direction</label>
+            <select id="direction">
+              <option value="row">row</option>
+              <option value="column">column</option>
+              <option value="row-reverse">row-reverse</option>
+              <option value="column-reverse">column-reverse</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="justify">justify-content</label>
+            <select id="justify">
+              <option value="flex-start">flex-start</option>
+              <option value="center">center</option>
+              <option value="flex-end">flex-end</option>
+              <option value="space-between">space-between</option>
+              <option value="space-around">space-around</option>
+              <option value="space-evenly">space-evenly</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="align">align-items</label>
+            <select id="align">
+              <option value="stretch">stretch</option>
+              <option value="flex-start">flex-start</option>
+              <option value="center">center</option>
+              <option value="flex-end">flex-end</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="wrap">flex-wrap</label>
+            <select id="wrap">
+              <option value="nowrap">nowrap</option>
+              <option value="wrap">wrap</option>
+              <option value="wrap-reverse">wrap-reverse</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="alignSelf">align-self for item 2</label>
+            <select id="alignSelf">
+              <option value="auto">auto</option>
+              <option value="flex-start">flex-start</option>
+              <option value="center">center</option>
+              <option value="flex-end">flex-end</option>
+              <option value="stretch">stretch</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="gap">gap: <span id="gapValue">16</span>px</label>
+            <input id="gap" type="range" min="0" max="60" value="16" />
+          </div>
+
+          <div class="control-group">
+            <label for="grow">flex-grow for item 3: <span id="growValue">0</span></label>
+            <input id="grow" type="range" min="0" max="5" value="0" />
+          </div>
+
+          <div class="control-group">
+            <label for="shrink">flex-shrink for item 1: <span id="shrinkValue">1</span></label>
+            <input id="shrink" type="range" min="0" max="5" value="1" />
+          </div>
+        </div>
+
+        <div class="demo-stage-wrap">
+          <div class="demo-stage" id="stage">
+            <div class="item" id="item1">1</div>
+            <div class="item" id="item2">2</div>
+            <div class="item" id="item3">3</div>
+            <div class="item">4</div>
+          </div>
+
+          <pre class="css-output" id="cssOutput"></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="examples">
+      <div class="section-header">
+        <div>
+          <h2>Real UI Examples</h2>
+          <p>Flexbox is not just theory. These are layouts you will build often.</p>
+        </div>
+      </div>
+
+      <div class="real-examples">
+        <div class="example-box">
+          <h3>1. Navbar: logo left, links right</h3>
+          <nav class="navbar-demo">
+            <div class="logo"><span class="logo-mark">F</span> FlexSchool</div>
+            <ul class="nav-links">
+              <li>Home</li>
+              <li>Lessons</li>
+              <li>Projects</li>
+              <li>Contact</li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="example-box">
+          <h3>2. Dashboard: sidebar should not shrink, main content should grow</h3>
+          <div class="dashboard-demo">
+            <aside class="sidebar">
+              <div class="logo"><span class="logo-mark">D</span> Dashboard</div>
+              <div class="side-link">Overview</div>
+              <div class="side-link">Analytics</div>
+              <div class="side-link">Settings</div>
+            </aside>
+
+            <section class="dashboard-main">
+              <div class="stats">
+                <div class="stat-card"><span>Projects</span><strong>12</strong></div>
+                <div class="stat-card"><span>Lessons</span><strong>48</strong></div>
+                <div class="stat-card"><span>Progress</span><strong>83%</strong></div>
+              </div>
+              <div class="content-panel">Main content uses <code>flex-grow: 1</code></div>
+            </section>
+          </div>
+        </div>
+
+        <div class="example-box">
+          <h3>3. Pricing Cards: equal height, buttons at bottom</h3>
+          <div class="pricing-demo">
+            <article class="price-card">
+              <h4>Starter</h4>
+              <h2>$0</h2>
+              <ul>
+                <li>Basic flex lessons</li>
+                <li>Small practice tasks</li>
+              </ul>
+              <button class="btn secondary">Start</button>
+            </article>
+
+            <article class="price-card featured">
+              <h4>Builder</h4>
+              <h2>$9</h2>
+              <ul>
+                <li>Real layout projects</li>
+                <li>Responsive challenges</li>
+                <li>Premium examples</li>
+              </ul>
+              <button class="btn">Choose</button>
+            </article>
+
+            <article class="price-card">
+              <h4>Pro</h4>
+              <h2>$19</h2>
+              <ul>
+                <li>Advanced UI systems</li>
+                <li>Portfolio-level layouts</li>
+              </ul>
+              <button class="btn secondary">Upgrade</button>
+            </article>
+          </div>
+        </div>
+
+        <div class="example-box">
+          <h3>4. Tags: flex-wrap + gap</h3>
+          <div class="wrap-demo">
+            <span class="pill">display: flex</span>
+            <span class="pill">flex-direction</span>
+            <span class="pill">justify-content</span>
+            <span class="pill">align-items</span>
+            <span class="pill">align-self</span>
+            <span class="pill">flex-wrap</span>
+            <span class="pill">gap</span>
+            <span class="pill">flex-grow</span>
+            <span class="pill">flex-shrink</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <h2>Practice Challenges</h2>
+          <p>Use this demo, then build these by yourself without copying.</p>
+        </div>
+      </div>
+
+      <div class="challenge">
+        <div class="challenge-card">
+          <h3>Easy</h3>
+          <p>Build a navbar using <code>justify-content: space-between</code>.</p>
+        </div>
+        <div class="challenge-card">
+          <h3>Medium</h3>
+          <p>Build responsive cards using <code>flex-wrap</code> and <code>gap</code>.</p>
+        </div>
+        <div class="challenge-card">
+          <h3>Hard</h3>
+          <p>Build a dashboard where the sidebar keeps its width and the main area grows.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <strong>Flexbox Mastery Demo</strong>
+      <span>Remember: justify-content = main axis, align-items = cross axis.</span>
+    </footer>
+  </main>
+
+  <script>
+    const stage = document.getElementById("stage");
+    const item1 = document.getElementById("item1");
+    const item2 = document.getElementById("item2");
+    const item3 = document.getElementById("item3");
+
+    const direction = document.getElementById("direction");
+    const justify = document.getElementById("justify");
+    const align = document.getElementById("align");
+    const wrap = document.getElementById("wrap");
+    const alignSelf = document.getElementById("alignSelf");
+    const gap = document.getElementById("gap");
+    const grow = document.getElementById("grow");
+    const shrink = document.getElementById("shrink");
+
+    const gapValue = document.getElementById("gapValue");
+    const growValue = document.getElementById("growValue");
+    const shrinkValue = document.getElementById("shrinkValue");
+    const cssOutput = document.getElementById("cssOutput");
+
+    function updateFlexDemo() {
+      stage.style.flexDirection = direction.value;
+      stage.style.justifyContent = justify.value;
+      stage.style.alignItems = align.value;
+      stage.style.flexWrap = wrap.value;
+      stage.style.gap = `${gap.value}px`;
+
+      item2.style.alignSelf = alignSelf.value;
+      item3.style.flexGrow = grow.value;
+      item1.style.flexShrink = shrink.value;
+
+      gapValue.textContent = gap.value;
+      growValue.textContent = grow.value;
+      shrinkValue.textContent = shrink.value;
+
+      cssOutput.textContent = `.container {
+  display: flex;
+  flex-direction: ${direction.value};
+  justify-content: ${justify.value};
+  align-items: ${align.value};
+  flex-wrap: ${wrap.value};
+  gap: ${gap.value}px;
+}
+
+.item-2 {
+  align-self: ${alignSelf.value};
+}
+
+.item-3 {
+  flex-grow: ${grow.value};
+}
+
+.item-1 {
+  flex-shrink: ${shrink.value};
+}`;
+    }
+
+    const controls = [direction, justify, align, wrap, alignSelf, gap, grow, shrink];
+    controls.forEach(control => control.addEventListener("input", updateFlexDemo));
+
+    updateFlexDemo();
+  </script>
 </body>
 </html>
