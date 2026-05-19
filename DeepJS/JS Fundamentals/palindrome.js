@@ -3,5 +3,5 @@ const isPalindrome = (word) => {
       let reversed = word.split('').reverse().join('');
       return reversed === word;
 }
-console.log(isPalindrome('madam'))
-console.log(isPalindrome("hello"));
+console.log(isPalindrome('madam'));   // true
+console.log(isPalindrome("hello"));  // false
