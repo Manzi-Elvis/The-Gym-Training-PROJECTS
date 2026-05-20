@@ -11,11 +11,11 @@ function addTask(){
       input.value = ""
 }
 
-input.addEventListener("keydown", (e) =>{
-      if(e.key === "Enter" && !e.shiftKey){
-            e.preventDefault();
-            addTask();
-      }
-})
+// input.addEventListener("keydown", (e) =>{
+//       if(e.key === "Enter" && !e.shiftKey){
+//             e.preventDefault();
+//             addTask();
+//       }
+// })
 
 addBtn.addEventListener("click", addTask);
