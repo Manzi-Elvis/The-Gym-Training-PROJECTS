@@ -1,6 +1,6 @@
 const input = document.querySelector("input");
 const button = document.querySelector("button");
-const list = document.getElementById("tasks");
+const list = document.getElementsByClassName("tasks");
 
 button.addEventListener("click", () =>{
       const taskText = input.value.trim();
