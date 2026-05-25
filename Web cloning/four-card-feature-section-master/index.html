@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+      .cont{
+        /* border: 1px solid red; */
+        padding: 10px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background: beige;
+        border-radius: 8px;
+        border-top: 20px solid blue;
+      }
+      .cont h1,p{
+        margin: 0;
+        padding: 0;
+      }
+      .img-cont{
+        /* border: 1px solid red; */
+        display: flex;
+        justify-content: right;
+      }
+    </style>
+</head>
+<body class=" flex flex-col items-center p-8 h-screen capitalize gap-7  ">
+    <div class=" flex flex-col gap-2  max-w-[480px]  items-center " >
+        <h1 class=" text-3xl  font-light " >reliable, efficient delivery</h1>
+        <h1 class=" text-3xl font-bold " >powered by technology</h1>
+        <p class=" text-sm text-center " >our artificial intelligence tools use millions of project data points to ensure that your project is successful</p>
+    </div>
+    <div class=" flex items-center justify-center gap-6 flex-wrap " >
+        <div class="border-t-4 rounded-sm flex flex-col gap-2 border-teal-400  max-w-[320px] p-8 shadow-lg ">
+            <h2 class=" text-xl font-bold " >supervisor</h2>
+            <p class=" text-sm ">monitors activity to identify project roadblocks</p>
+           <div class=" flex items-end justify-end " >
+             <img src="./images/icon-supervisor.svg" alt="photo" class=" w-[50px] h-[50px]" >
+           </div>
+        </div>
+
+        <div class=" flex flex-col justify-center gap-6 " >
+            <div class="border-t-4 rounded-sm flex flex-col gap-2 border-red-600 max-w-[320px] p-8 shadow-lg ">
+            <h2 class=" text-xl font-bold " >team builder</h2>
+            <p class=" text-sm ">monitors activity to identify project roadblocks</p>
+           <div class=" flex items-end justify-end " >
+             <img src="./images/icon-team-builder.svg" alt="photo" class=" w-[50px] h-[50px]" >
+           </div>
+        </div>
+        <div class="border-t-4 rounded-sm flex flex-col gap-2 border-orange-400  max-w-[320px] p-8 shadow-lg ">
+            <h2 class=" text-xl font-bold " >karma</h2>
+            <p class=" text-sm ">monitors activity to identify project roadblocks</p>
+           <div class=" flex items-end justify-end " >
+             <img src="./images/icon-karma.svg" alt="photo" class=" w-[50px] h-[50px]" >
+           </div>
+        </div>
+        </div>
+        <div class="border-t-4 rounded-sm flex flex-col gap-2 border-blue-600  max-w-[320px] p-8 shadow-lg ">
+            <h2 class=" text-xl font-bold " >calculator</h2>
+            <p class=" text-sm ">monitors activity to identify project roadblocks</p>
+           <div class=" flex items-end justify-end" >
+             <img src="./images/icon-calculator.svg" alt="photo" class=" w-[50px] h-[50px]" >
+           </div>
+        </div>
+    </div>
+</body>
+</html>
