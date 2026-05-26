@@ -1,3 +1,5 @@
+// constructor = special method for defining the properties and methods of objects.
+
 function car(make, model, year, gear, color){
       this.make = make,
       this.model = model,
