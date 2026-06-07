@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+      <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet">
+</head>
+<body>
+      <div class="flex">
+            <button class="flex gap-2 items-center justify-center" data-dropdown-toggle="dropdownCountry"><img class="w-5" src="./assets/countries/usa.png" alt=""><p class="flex items-center justify-center">English<svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg></p></button>
+            <div id="dropdownCountry" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-[10px] shadow-lg w-44">
+                  <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownDefaultButton">
+                        <li>
+                              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded gap-2"><img class="w-5" src="./assets/countries/uk.png" alt="">English</a>
+                        </li>
+                        <li>
+                              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded gap-2"><img class="w-5" src="./assets/countries/germany.png" alt="">German</a>
+                        </li>
+                        <li>
+                              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded gap-2"><img class="w-5" src="./assets/countries/turkish.png" alt="">Turki</a>
+                        </li>
+                  </ul>
+            </div>
+            <span class="mx-2">|</span>
+            <button class="flex gap-2 items-center justify-center" data-dropdown-toggle="dropdownCurrency">
+                  <p class="flex items-center justify-center">USD
+                        <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
+                  </p>
+            </button>
+            <div id="dropdownCurrency" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-[10px] shadow-lg w-44">
+                  <ul class="p-2 text-sm text-body font-medium items-center" aria-labelledby="dropdownDefaultButton">
+                        <li>
+                              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">UK</a>
+                        </li>
+                        <li>
+                              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">EUR</a>
+                        </li>
+                        <li>
+                              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">CNY</a>
+                        </li>
+                  </ul>
+            </div>
+      </div>
+</body>
+</html>
