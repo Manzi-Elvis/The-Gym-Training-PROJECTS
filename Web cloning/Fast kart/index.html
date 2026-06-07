@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>FastKart</title>
+      <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+      <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet">
+</head>
+<body class="bg-[url('./assets/bg-body.png')] bg-cover bg-center bg-no-repeat min-h-screen text-gray-800">
+     <div class="bg-teal-600 text-white text-sm py-2">
+      <div class="max-w-7xl mx-auto px-4 flex justify-between ml-40">
+            <!-- <p class="flex gap-1"><img class="brightness-0 invert w-4" src="./assets/hero/loacation.svg" alt="">1418 Riverwood Drive, CA 96052, US</p> -->
+            <p><strong>Welcome to FreshKart!</strong>&nbsp;Wrap new offers/gift every single day on Weekends. <strong class="ms-1">New Coupon Code: Fast024</strong></p>
+            <div class="flex mr-20 ">
+                  <button class="flex gap-2 items-center justify-center" data-dropdown-toggle="dropdownCountry"><img class="w-5" src="./assets/countries/usa.png" alt=""><p class="flex items-center justify-center">English<svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg></p></button>
+                  <span class="mx-2">|</span>
+                  <button data-dropdown-toggle="dropdownCurrency" class="flex items-center justify-center">USD<svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg></button>
+            </div>
+      </div>
+      <!-- Dropdown menu 1 -->
+      <div id="dropdownCountry" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44">
+                        <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownDefaultButton">
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Dashboard</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Settings</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Earnings</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Sign out</a>
+                              </li>
+                        </ul>
+      </div>
+      <!-- Dropdown menu 2 -->
+      <div id="dropdownCurrency" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44">
+                        <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownDefaultButton">
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Dashboard</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Settings</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Earnings</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Sign out</a>
+                              </li>
+                        </ul>
+      </div>
+      
+     </div> 
+</body>
+</html>
