@@ -3,34 +3,39 @@
 <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Document</title>
+      <title>FastKart</title>
+      <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
       <script src="https://cdn.tailwindcss.com"></script>
       <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
       <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet">
 </head>
-<body>
-      <div class="flex">
-            <button class="flex gap-2 items-center justify-center" data-dropdown-toggle="dropdownCountry"><img class="w-5" src="./assets/countries/usa.png" alt=""><p class="flex items-center justify-center">English<svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg></p></button>
-            <div id="dropdownCountry" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-[10px] shadow-lg w-44">
+<body class=" font-['Public Sans', 'sans-serif'] overflow-x-hidden">
+     <div class="bg-teal-600  text-sm py-2">
+            <div class="max-w-7xl mx-auto flex justify-between px-4 sm:px-6 lg:px-20">
+                  <!-- <p class="flex gap-1"><img class="brightness-0 invert w-4" src="./assets/hero/loacation.svg" alt="">1418 Riverwood Drive, CA 96052, US</p> -->
+                  <p class="text-white hidden sm:block"><strong>Welcome to FreshKart!</strong>&nbsp;Wrap new offers/gift every single day on Weekends. <strong class="ms-1">New Coupon Code: Fast024</strong></p>
+                  <div class="flex ml-48">
+                        <button class="flex gap-2 items-center justify-center" data-dropdown-toggle="dropdownCountry"><img class="w-5" src="./assets/countries/usa.png" alt=""><p class="flex items-center justify-center text-white">English<svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg></p></button>
+                  <div id="dropdownCountry" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-[10px] shadow-lg w-44">
                   <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownDefaultButton">
                         <li>
-                              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded gap-2"><img class="w-5" src="./assets/countries/uk.png" alt="">English</a>
+                              <a href="#" class="inline-flex items-center w-full p-2 gap-2"><img class="w-5" src="./assets/countries/uk.png" alt="">English</a>
                         </li>
                         <li>
-                              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded gap-2"><img class="w-5" src="./assets/countries/germany.png" alt="">German</a>
+                              <a href="#" class="inline-flex items-center w-full p-2 gap-2"><img class="w-5" src="./assets/countries/germany.png" alt="">German</a>
                         </li>
                         <li>
-                              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded gap-2"><img class="w-5" src="./assets/countries/turkish.png" alt="">Turki</a>
+                              <a href="#" class="inline-flex items-center w-full p-2 gap-2"><img class="w-5" src="./assets/countries/turkish.png" alt="">Turki</a>
                         </li>
                   </ul>
             </div>
-            <span class="mx-2">|</span>
+            <span class="mx-2 text-white">|</span>
             <button class="flex gap-2 items-center justify-center" data-dropdown-toggle="dropdownCurrency">
-                  <p class="flex items-center justify-center">USD
+                  <p class="flex items-center justify-center text-white">USD
                         <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
                   </p>
             </button>
-            <div id="dropdownCurrency" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-[10px] shadow-lg w-44">
+            <div id="dropdownCurrency" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-[10px] shadow-lg w-30">
                   <ul class="p-2 text-sm text-body font-medium items-center" aria-labelledby="dropdownDefaultButton">
                         <li>
                               <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">UK</a>
@@ -43,6 +48,201 @@
                         </li>
                   </ul>
             </div>
+      </div>
+      </div>
+     </div>
+     <div class=" hidden sm:flex ml-20 mr-20 relative gap-5 items-center justify-between mt-5 ">
+      <button class="lg:hidden"><img src="./assets/menu.svg" alt=""></button>
+      <img src="./assets/hero/logo.png" class="img-fluid w-[129px] h-[23px]" alt="">
+      <div class="flex items-center justify-center gap-2">
+            <div class="border-gray-400 border-solid border rounded-lg p-1.5">
+                  <div class="rounded-lg p-2.5 bg-gray-200">
+                        <img src="./assets/hero/loacation.svg" class="w-4" alt="">
+                  </div>
+            </div>
+            <div class="flex gap-0">
+                  <input class="border-gray-400 border-solid border rounded-tl-lg rounded-bl-lg p-1.5 w-full sm:w-[25rem] lg:w-[30rem] h-12" type="text" placeholder = "I'm searching for...">
+                  <button class="border border-solid border-[#ffa53b] bg-[#ffa53b] px-5 rounded-r-lg rounded-br-lg">
+                        <img class="w-5" src="./assets/search.svg" alt="">
+                  </button>
+            </div>
+      </div>
+      <div class="flex align-center justify-center gap-2">
+            <img src="./assets/hero/call.svg" alt="">
+            <span class="mx-2 text-gray-600">|</span>
+            <img src="./assets/heart.svg" alt="">
+            <span class="mx-2 text-gray-600">|</span>
+            <img src="./assets/cart.svg" alt="">
+            <span class="mx-2 text-gray-600">|</span>
+            <img src="./assets/hero/user.svg" alt="">
+      </div>
+     </div>
+     <div class="flex mr-5 ml-5 mt-5 justify-between  sm:hidden ">
+            <img src="./assets/menu.svg" alt="">
+            <img src="./assets/hero/logo.png" class="img-fluid w-[129px] h-[23px]" alt="">
+            <img class="sm:hidden" src="./assets/hero/user.svg" alt="">
+      </div>
+     <div class="hidden sm:flex px-6 lg:px-20 justify-between mt-5">
+            <button class=" flex gap-2 border-none rounded-lg px-7 py-4 bg-teal-600 text-white font-bold"><img src="./assets/menu.svg" alt=""><p>All Categories</p></button>
+            <div class="flex justify-center items-center gap-10">
+            <div>
+                  <button class="flex items-center justify-center font-semibold hover:text-teal-600" data-dropdown-toggle="dropdownHoverHome" data-dropdown-trigger="hover">
+                        <p>Home</p>
+                        <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
+                  </button>
+                  <div id="dropdownHoverHome" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44 text-black">
+                        <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownHoverButton">
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Kartshop</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Sweetshop</a>
+                              </li>
+                              <li>
+                              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Organic</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Supershop</a>
+                              </li>
+                        </ul>
+                  </div>
+            </div>
+            <div>
+                  <button class="flex items-center justify-center font-semibold hover:text-teal-600" data-dropdown-toggle="dropdownHoverShop" data-dropdown-trigger="hover">
+                        <p>Shop</p>
+                        <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
+                  </button>
+                  <div id="dropdownHoverShop" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44 text-black">
+                        <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownHoverButton">
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Kartshop</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Sweetshop</a>
+                              </li>
+                              <li>
+                              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Organic</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Supershop</a>
+                              </li>
+                        </ul>
+                  </div>
+            </div>
+            <div>
+                  <button class="flex items-center justify-center font-semibold hover:text-teal-600" data-dropdown-toggle="dropdownHoverProduct" data-dropdown-trigger="hover">
+                        <p>Product</p>
+                        <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
+                  </button>
+                  <div id="dropdownHoverProduct" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44 text-black">
+                        <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownHoverButton">
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Kartshop</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Sweetshop</a>
+                              </li>
+                              <li>
+                              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Organic</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Supershop</a>
+                              </li>
+                        </ul>
+                  </div>
+            </div>
+            <div>
+                  <button class="flex items-center justify-center font-semibold hover:text-teal-600" data-dropdown-toggle="dropdownHoverMenu" data-dropdown-trigger="hover">
+                        <p>Mega Menu</p>
+                        <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
+                  </button>
+                  <div id="dropdownHoverMenu" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44 text-black">
+                        <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownHoverButton">
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Kartshop</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Sweetshop</a>
+                              </li>
+                              <li>
+                              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Organic</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Supershop</a>
+                              </li>
+                        </ul>
+                  </div>
+            </div>
+            <div>
+                  <button class="flex items-center justify-center font-semibold hover:text-teal-600" data-dropdown-toggle="dropdownHoverBlog" data-dropdown-trigger="hover">
+                        <p>Blog</p>
+                        <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
+                  </button>
+                  <div id="dropdownHoverBlog" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44 text-black">
+                        <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownHoverButton">
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Kartshop</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Sweetshop</a>
+                              </li>
+                              <li>
+                              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Organic</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Supershop</a>
+                              </li>
+                        </ul>
+                  </div>
+            </div>
+            <div>
+                  <button class="flex items-center justify-center font-semibold hover:text-teal-600" data-dropdown-toggle="dropdownHoverPages" data-dropdown-trigger="hover">
+                        <p>Pages</p>
+                        <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
+                  </button>
+                  <div id="dropdownHoverPages" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44 text-black">
+                        <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownHoverButton">
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Kartshop</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Sweetshop</a>
+                              </li>
+                              <li>
+                              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Organic</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Supershop</a>
+                              </li>
+                        </ul>
+                  </div>
+            </div>
+            <div>
+                  <button class="flex items-center justify-center font-semibold hover:text-teal-600" data-dropdown-toggle="dropdownHoverSeller" data-dropdown-trigger="hover">
+                        <p>Seller</p>
+                        <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
+                  </button>
+                  <div id="dropdownHoverSeller" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44 text-black">
+                        <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownHoverButton">
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Kartshop</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Sweetshop</a>
+                              </li>
+                              <li>
+                              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Organic</a>
+                              </li>
+                              <li>
+                                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Supershop</a>
+                              </li>
+                        </ul>
+                  </div>
+            </div>
+            </div>
+            <button class="border-none px-5 bg-teal-100 rounded-lg">
+                  <img src="./assets/thunder.svg" alt="">
+            </button>
       </div>
 </body>
 </html>
