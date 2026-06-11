@@ -83,7 +83,7 @@
             <img class="sm:hidden" src="./assets/hero/user.svg" alt="">
       </div>
       <nav class="fixed bottom-0 left-0 w-full bg-teal-600 shadow-lg border-t z-50">
-            <div class="flex justify-between py-3 mr-5 ml-5">
+            <div class="flex justify-between py-3 mr-5 ml-5 sm:hidden">
                   <a class="text-white flex flex-col items-center justify-center" href="#"><svg class="w-6 h-6 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955a1.125 1.125 0 0 1 1.591 0L21.75 12M4.5 9.75V19.5a.75.75 0 0 0 .75.75h4.5v-4.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75v4.5h4.5a.75.75 0 0 0 .75-.75V9.75" /></svg> Home</a>
                   <a class="text-white flex flex-col items-center justify-center" href="#"><svg class="w-6 h-6 " xmlns="http://www.w3.org/2000/svg"fill="none"viewBox="0 0 24 24"stroke-width="1.5"stroke="currentColor"><path stroke-linecap="round"stroke-linejoin="round"d="M3 3h7v7H3zm11 0h7v7h-7zM3 14h7v7H3zm11 0h7v7h-7z"/></svg>Category</a>
                   <a class="text-white flex flex-col items-center justify-center" href="#"><svg class="w-6 h-6 " xmlns="http://www.w3.org/2000/svg"fill="none"viewBox="0 0 24 24"stroke-width="1.5"stroke="currentColor"><path stroke-linecap="round"stroke-linejoin="round"d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z"/></svg>Search</a>
@@ -253,27 +253,33 @@
                   <img src="./assets/thunder.svg" alt="">
             </button>
       </div>
-      <div class="mt-5 mr-5 ml-5">
-            <div class="relative">
-                  <p class="absolute top-[50px] left-5 font-extralight">Exclusive offer<span class=" ml-2 text-red-400 bg-red-200 px-2 py-1 rounded-full">30% Off</span></p>
+      <div class="m-5 sm:flex gap-5 lg:mx-20 ">
+            <div>
+                  <div class="relative">
+                  <p class="absolute top-[50px] left-5 font-extralight lg:top-[100px]">Exclusive offer<span class=" ml-2 text-red-400 bg-red-200 px-2 py-1 rounded-full">30% Off</span></p>
                   <p class="absolute top-[75px] left-5 font-bold">STAY HOME & DELIVERED <br/>YOUR <span class="text-teal-600">DAILY NEEDS</span></p>
                   <img class="" src="./assets/hero/1.jpeg" alt="">
                   <button class="absolute top-[125px] left-5 bg-red-400 text-white px-4 py-2 rounded-lg"> Shop Now ➞</button>
             </div>
-            <div class="relative mt-5">
+            </div>
+            <div class="sm:block gap-5">
+                  <div class="relative mt-5">
                   <p class="absolute top-[50px] left-5 font-semibold text-2xl text-red-400">45%<span class="ml-2 text-black from-neutral text-sm font-semibold">OFF</span></p>
                   <p class="absolute top-[85px] left-5 font-bold text-xl text-teal-600">Nut Collection</p>
                   <p class="absolute top-[120px] left-5">We deliver organic <br/>vegetables and fruits</p>
                   <img class="" src="./assets/hero/21.jpeg" alt="">
                   <button class="absolute top-[180px] left-5 text-black"> Shop Now ➞</button>
-            </div>
-            <div class="relative mt-5">
+                  </div>
+
+                  <div class="relative mt-5">
                   <p class="absolute top-[50px] left-5 font-bold text-xl text-teal-600">Healthy Food</p>
                   <p class="absolute top-[85px] left-5 font-bold text-lg text-red-400">Organic Market</p>
                   <p class="absolute top-[120px] left-5">Start your daily shopping <br/>with some...</p>
                   <img class="" src="./assets/hero/21.jpeg" alt="">
                   <button class="absolute top-[180px] left-5 text-black"> Shop Now ➞</button>
+                  </div>
             </div>
+            
       </div>
 </body>
 </html>
