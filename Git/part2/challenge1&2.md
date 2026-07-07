@@ -1,4 +1,4 @@
-# Challenge 1:
+# Challenge 1&2:
 
 ```bash
 PS C:\Users\elvis\Documents\PROJECTS\Advanced-Git> git checkout -b ft/new-feature
