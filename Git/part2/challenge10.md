@@ -42,5 +42,9 @@ Previous HEAD position was 7ea480e chore: Create third and fourth files
 Switched to branch 'main'
 Your branch is ahead of 'origin/main' by 2 commits.
   (use "git push" to publish your local commits)
+PS C:\Users\elvis\Documents\PROJECTS\Advanced-Git> git push origin main
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/Manzi-Elvis/Advanced-Git.git
+   a7259d4..227cbfd  main -> main
 PS C:\Users\elvis\Documents\PROJECTS\Advanced-Git> 
 ```
