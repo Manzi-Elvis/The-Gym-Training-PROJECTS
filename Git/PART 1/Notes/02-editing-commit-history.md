@@ -37,7 +37,7 @@ The number after `~` = how many commits back from HEAD you want to include.
    ```
    Saved and closed again.
 
-## ⚠️ A Real Snag We Hit: Stuck Rebase
+## ⚠️ A Real Snag I Hit: Stuck Rebase
 The first attempt got interrupted (editor closed before finishing), leaving Git in a stuck "rebase in progress" state. The fix:
 ```bash
 git rebase --abort
