@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Event Bubbling Demo</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+}
+
+#grandparent{
+    padding:60px;
+    background:#3498db;
+}
+
+#parent{
+    padding:50px;
+    background:#2ecc71;
+}
+
+#child{
+    padding:40px;
+    background:#f39c12;
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="grandparent">
+    Grandparent
+
+    <div id="parent">
+        Parent
+
+        <div id="child">
+            Child
+        </div>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
