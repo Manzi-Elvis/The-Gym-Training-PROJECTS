@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Event Bubbling Demo</title>
+      <style>
+            #grandparent{
+                  padding: 60px;
+                  background: #3498db;
+            }
+            #parent{
+                  padding: 50px;
+                  background: #2ecc71;
+            }
+            #child{
+                  padding: 40px;
+                  background: #f39c12;
+            }
+      </style>
+</head>
+<body>
+      <div id="grandparent">
+            Grand Parent
+            <div id="parent">
+                  Parent
+                  <div id="child">Child</div>
+            </div>
+      </div>
+      <script src = "script.js"></script>
+</body>
+</html>
