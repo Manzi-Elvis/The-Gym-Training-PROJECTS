@@ -30,10 +30,10 @@ function pascalsTriangle(n) {
   if (n <= 0) return [];
   const result = [];
   for( let row = 0; row < n; row++){
-    let current = 1;
+    let current = 1n;
     for(let col = 0; col <= row; col++){
-      result.push(current)
-      current = current * (row - col) / (col + 1)
+      result.push(Number(current));
+      current = current * BigInt(row - col) / BigInt(col + 1);
     }
   }
   return result;
