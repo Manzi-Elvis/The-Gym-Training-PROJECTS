@@ -16,7 +16,7 @@ Assertion messages may be unclear about what they display in some languages.
 If you read "...It Should encode XXX", the "XXX" is the expected result, not the input!
 */
 
-public class DuplicateEncoder {
+public class duplicateEncoder {
     public static String encode(String word) {
         word = word.toLowerCase();
         StringBuilder result = new StringBuilder();
