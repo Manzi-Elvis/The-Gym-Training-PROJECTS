@@ -1,8 +1,8 @@
-//  Create a function called `myFetch` that should work
-// as a simple version of the native fetch() API.
-// The function `myFetch` should use the XMLHttpRequest to 
-// make a `GET` Request and return a promise that resolves 
-// with the request’s response and rejects with an error if any
+// 2. Create a function called `myFetch` that should
+// work as a simple version of the native fetch() API.
+// The function `myFetch` should use the XMLHttpRequest
+// to make a `GET` Request and return a promise that
+// resolves with the request’s response and rejects with an error if any.
 
 
 function myFetch(url) {
@@ -18,12 +18,12 @@ function myFetch(url) {
       }
     }
     xhr.onerror = () => {
-        reject("Network Error")
+        reject(new Error("Network Error"))
       }
       xhr.send()
   })
 }
     
-    myFetch('https://my-random-api.com/data')
+    myFetch('https://jsonplaceholder.typicode.com/users')
     	.then(data => console.log(data))
-    	.catch(error => console.log('Error:', error));
+    	.catch(error => console.error(error));
