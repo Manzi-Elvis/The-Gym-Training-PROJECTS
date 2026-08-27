@@ -38,3 +38,15 @@ function submitOrder(user){
     console.log(`Your order ${success ? "was" : "was NOT"} plced successfully`);
   });
 };
+
+/*
+The approach used here is to chain JavaScript Promises with .then() so that each
+asynchronous operation happens in the correct order: first, getShoppingCartAsync()
+retrieves the cart; then getProfileAsync() retrieves the customer’s profile; once
+both are available, the synchronous calculateShipping() calculates the shipping rate;
+finally, placeOrderAsync() places the order. The main problem this solves is managing
+asynchronous dependencies—you cannot calculate shipping until you have both the cart
+and ZIP code, and you cannot place the order until the shipping rate is known. The nested
+ .then() structure ensures these steps happen sequentially and that the final .then()
+receives the result of placeOrderAsync() so it can log whether the order was successfully placed.
+*/
