@@ -86,3 +86,30 @@ console.log(solution([7, 70, 700]));      // 21
 console.log(solution([9, 90, 900, 9000])); // 36
 
 console.log(solution([1000000, 2000000, 3000000])); // 3000000
+
+
+/*
+const solution = (num) => {
+
+We create a function that receives the array num.
+
+const g = num.reduce((a, b) => {
+
+We go through all the numbers and use GCD to find the greatest common divisor of the entire array.
+
+while (b !== 0) {
+
+Keep working until the remainder becomes 0.
+
+[a, b] = [b, a % b];
+
+Replace a with b, and replace b with the remainder of a ÷ b. This is how the Euclidean algorithm finds the GCD.
+
+return a;
+
+When b becomes 0, a contains the GCD, so we return it to reduce.
+
+return g * num.length;
+
+Eventually, every number becomes the GCD. So if the GCD is 3 and there are 3 numbers, the final array is [3, 3, 3], and its sum is 3 × 3 = 9.
+*/
