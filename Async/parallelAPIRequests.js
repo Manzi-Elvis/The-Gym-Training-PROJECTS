@@ -61,3 +61,4 @@ async function getUserDashboard(){
             console.error("Error: ", error.message)
       }
 }
+getUserDashboard().then(data => console.log(data))
