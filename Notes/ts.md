@@ -128,8 +128,7 @@
     - 🎤 "I prefer `unknown` when I genuinely don't know the type."
   - 💀 **`never`** → can't happen (always throws or never ends)
     - ```ts
-      function fail(msg: string): never { throw new Error(msg); }
-     ```
+      function fail(msg: string): never { throw new Error(msg);}
   - 🆚 **`void` vs `never`**
     - `void`: returns, but ignore it
     - `never`: never returns normally
@@ -217,7 +216,7 @@
   - ```ts
     enum Role { Admin = "admin", User = "user" }
     ```
-    
+
   - `const enum` has special compile behavior, so know the trade-offs first
   - 🥊 **Enum vs union literal**
     - Enums exist at runtime 🏃
