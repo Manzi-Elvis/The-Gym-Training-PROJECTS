@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday Ornella!</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#ffd1e8;--bg2:#ffe8a3;--bg3:#b9e6ff;--ink:#3a1459;--pill:#ff3d8b;--pillink:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#3b1260;--bg2:#6a1b5d;--bg3:#12315e;--ink:#fff4c2}}
+:root[data-theme="dark"]{--bg1:#3b1260;--bg2:#6a1b5d;--bg3:#12315e;--ink:#fff4c2}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;overflow:hidden}
+body{font-family:'Fredoka',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);background:linear-gradient(160deg,var(--bg1),var(--bg2) 50%,var(--bg3))}
+canvas{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.ui{position:fixed;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:calc(env(safe-area-inset-top,0px) + 16px) 16px calc(env(safe-area-inset-bottom,0px) + 18px)}
+h1{margin:0;text-align:center;font-size:clamp(2.4rem,10vw,6rem);line-height:1;letter-spacing:.02em}
+h1 small{display:block;font-size:clamp(1rem,3.4vw,1.6rem);font-weight:500;margin-bottom:6px}
+h1 span{display:inline-block;animation:hop 1.6s ease-in-out infinite;text-shadow:0 4px 0 rgba(255,255,255,.7),0 8px 18px rgba(0,0,0,.18)}
+h1 span:nth-child(odd){color:#ff3d8b}h1 span:nth-child(even){color:#7a3cff}h1 span:nth-child(3n){color:#ff9f1c}
+@keyframes hop{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-14px) rotate(4deg)}}
+@media (prefers-reduced-motion:reduce){h1 span{animation:none}}
+.bottom{display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:auto;text-align:center}
+.msg{max-width:30ch;min-height:2.6em;font-size:clamp(1rem,3.5vw,1.25rem);font-weight:500}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:12px 20px;background:var(--pill);color:var(--pillink);cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.2);transition:transform .1s}
+button:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.2)}
+button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+button.alt{background:#7a3cff}
+.score{font-size:.95rem;opacity:.85}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="ui">
+  <h1><small>Happy Birthday</small><span>O</span><span>R</span><span>N</span><span>E</span><span>L</span><span>L</span><span>A</span><span>!</span></h1>
+  <div class="bottom">
+    <div class="msg" id="msg">Drag to spin the cake. Pop the balloons!</div>
+    <div class="row">
+      <button id="wish">Blow out the candles</button>
+      <button id="boom" class="alt">Confetti!</button>
+    </div>
+    <div class="score" id="score">Balloons popped: 0</div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+var cv=document.getElementById('c');
+var R=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
+R.setPixelRatio(Math.min(devicePixelRatio,2));
+var S=new THREE.Scene();
+var cam=new THREE.PerspectiveCamera(50,1,.1,100);
+cam.position.set(0,1.5,11);
+S.add(new THREE.AmbientLight(0xffffff,.8));
+var sun=new THREE.DirectionalLight(0xffffff,.9);sun.position.set(4,8,6);S.add(sun);
+var glow=new THREE.PointLight(0xffb347,1.2,8);glow.position.set(0,1.6,0);
+function rs(){var w=innerWidth,h=innerHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.position.z=w/h<.8?15:11;cam.updateProjectionMatrix()}
+addEventListener('resize',rs);rs();
+var COL=[0xff3d8b,0x7a3cff,0xff9f1c,0x2ec4b6,0xffd23f,0x4d9bff];
+function M(c,o){return new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.45},o||{}))}
+
+// Cake
+var cake=new THREE.Group();cake.position.y=-2.4;S.add(cake);
+function cyl(r,h,y,c){var m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,48),M(c));m.position.y=y;cake.add(m);return m}
+cyl(2.6,.12,-.06,0xffffff);
+cyl(2,1,.5,0xff8fc2);cyl(1.4,.9,1.45,0xffe08a);cyl(.9,.8,2.3,0xb48cff);
+[[2,1],[1.4,1.9],[.9,2.7]].forEach(function(t){var tr=new THREE.Mesh(new THREE.TorusGeometry(t[0],.09,12,48),M(0xffffff));tr.rotation.x=Math.PI/2;tr.position.y=t[1];cake.add(tr)});
+for(var i=0;i<12;i++){var a=i/12*6.283,b=new THREE.Mesh(new THREE.SphereGeometry(.14,12,12),M(0xd7263d));b.position.set(Math.cos(a)*1.7,1.0,Math.sin(a)*1.7);cake.add(b)}
+var flames=[];
+for(var j=0;j<5;j++){var ang=j/5*6.283,x=Math.cos(ang)*.5,z=Math.sin(ang)*.5;
+ var cd=new THREE.Mesh(new THREE.CylinderGeometry(.06,.06,.6,10),M(COL[j%6]));cd.position.set(x,3.0,z);cake.add(cd);
+ var fl=new THREE.Mesh(new THREE.ConeGeometry(.09,.28,10),new THREE.MeshBasicMaterial({color:0xffc83d}));fl.position.set(x,3.45,z);cake.add(fl);flames.push(fl)}
+glow.position.set(0,3.5,0);cake.add(glow);
+var lit=true;
+
+// Stars
+var sg=new THREE.BufferGeometry(),sp=[];
+for(var k=0;k<250;k++)sp.push((Math.random()-.5)*40,(Math.random()-.5)*24,-8-Math.random()*10);
+sg.setAttribute('position',new THREE.Float32BufferAttribute(sp,3));
+var stars=new THREE.Points(sg,new THREE.PointsMaterial({color:0xffffff,size:.12}));S.add(stars);
+
+// Balloons (first 7 carry the letters O-R-N-E-L-L-A)
+var word='ORNELLA',balloons=[],bodies=[];
+function letterSprite(ch){var c=document.createElement('canvas');c.width=c.height=128;var g=c.getContext('2d');g.font='700 96px Fredoka,Arial,sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillStyle='#fff';g.fillText(ch,64,70);
+ var s=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c),transparent:true}));s.scale.set(.9,.9,1);s.position.z=.78;return s}
+function mkBalloon(i){
+ var g=new THREE.Group(),c=COL[i%6];
+ var body=new THREE.Mesh(new THREE.SphereGeometry(.8,24,24),M(c,{roughness:.2,metalness:.1}));body.scale.y=1.2;g.add(body);
+ var kn=new THREE.Mesh(new THREE.ConeGeometry(.12,.2,8),M(c));kn.position.y=-1;kn.rotation.x=Math.PI;g.add(kn);
+ var st=new THREE.Mesh(new THREE.CylinderGeometry(.012,.012,2,4),new THREE.MeshBasicMaterial({color:0xffffff}));st.position.y=-2.1;g.add(st);
+ if(i<7)g.add(letterSprite(word[i]));
+ body.userData.g=g;g.userData={c:c,ph:Math.random()*9,sp:.5+Math.random()*.5,bx:0};
+ place(g,true);S.add(g);balloons.push(g);bodies.push(body)}
+function place(g,init){var side=Math.random()<.5?-1:1;g.userData.bx=side*(3.2+Math.random()*4);
+ g.position.set(g.userData.bx,init?-6+Math.random()*12:-8,-2+Math.random()*3);g.visible=true}
+for(var n=0;n<14;n++)mkBalloon(n);
+
+// Confetti
+var bits=[],bg=new THREE.PlaneGeometry(.18,.12);
+function burst(p,count){for(var i=0;i<count;i++){var m=new THREE.Mesh(bg,new THREE.MeshBasicMaterial({color:COL[i%6],side:THREE.DoubleSide}));
+ m.position.copy(p);m.userData={v:new THREE.Vector3((Math.random()-.5)*7,Math.random()*6+1,(Math.random()-.5)*7),r:new THREE.Vector3(Math.random()*9,Math.random()*9,0),life:2.5+Math.random()};S.add(m);bits.push(m)}}
+var popped=0,msg=document.getElementById('msg'),score=document.getElementById('score'),party=0;
+var wishes=['Pop! Make it a great year, Ornella!','Pop! You make work way more fun.','Pop! Cake is on its way.','Pop! Another lap around the sun.','Pop! Legend status confirmed.'];
+function pop(g){burst(g.position,36);g.visible=false;popped++;score.textContent='Balloons popped: '+popped;
+ msg.textContent=popped%10===0?'Party mode! Happy birthday Ornella!':wishes[popped%wishes.length];
+ if(popped%10===0)party=3;setTimeout(function(){place(g,false)},1200)}
+
+// Buttons
+var wb=document.getElementById('wish');
+wb.onclick=function(){lit=!lit;flames.forEach(function(f){f.visible=lit});glow.intensity=lit?1.2:0;
+ wb.textContent=lit?'Blow out the candles':'Relight the candles';
+ if(!lit){burst(new THREE.Vector3(0,1.5,1),90);msg.textContent='Wish made! Hope it comes true, Ornella.'}else msg.textContent='Candles are back. Make another wish!'};
+document.getElementById('boom').onclick=function(){burst(new THREE.Vector3(0,0,2),140);party=2;msg.textContent='Happy Birthday Ornella!'};
+
+// Drag to spin + click to pop
+var down=false,moved=0,lx=0,vel=.006,rc=new THREE.Raycaster(),mp=new THREE.Vector2();
+cv.addEventListener('pointerdown',function(e){down=true;moved=0;lx=e.clientX;cv.setPointerCapture(e.pointerId)});
+cv.addEventListener('pointermove',function(e){if(!down)return;var d=e.clientX-lx;lx=e.clientX;moved+=Math.abs(d);vel=d*.01;cake.rotation.y+=d*.01});
+cv.addEventListener('pointerup',function(e){down=false;if(moved>6)return;
+ mp.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);rc.setFromCamera(mp,cam);
+ var vis=bodies.filter(function(b){return b.userData.g.visible}),h=rc.intersectObjects(vis);
+ if(h.length){pop(h[0].object.userData.g);return}
+ if(rc.intersectObjects(cake.children,true).length){burst(new THREE.Vector3(0,1,1),40);vel=.12}});
+
+var clk=new THREE.Clock();
+function loop(){requestAnimationFrame(loop);var dt=Math.min(clk.getDelta(),.05),t=clk.elapsedTime;
+ if(!down){cake.rotation.y+=vel;vel+=(.006-vel)*.03}
+ cake.position.y=-2.4+Math.sin(t*1.5)*.08;
+ flames.forEach(function(f,i){f.scale.y=1+Math.sin(t*14+i)*.25;f.scale.x=1+Math.cos(t*11+i)*.12});
+ if(lit)glow.intensity=1.1+Math.sin(t*12)*.15;
+ balloons.forEach(function(g){if(!g.visible)return;var u=g.userData;g.position.y+=u.sp*dt;g.position.x=u.bx+Math.sin(t*.9+u.ph)*.5;g.rotation.z=Math.sin(t+u.ph)*.12;g.rotation.y=Math.sin(t*.7+u.ph)*.5;if(g.position.y>7)place(g,false)});
+ stars.rotation.z=t*.01;
+ if(party>0){party-=dt;if(Math.random()<.5)burst(new THREE.Vector3((Math.random()-.5)*10,6,(Math.random()-.5)*3),3)}
+ for(var i=bits.length-1;i>=0;i--){var b=bits[i],d=b.userData;d.v.y-=9*dt;b.position.addScaledVector(d.v,dt);b.rotation.x+=d.r.x*dt;b.rotation.y+=d.r.y*dt;d.life-=dt;
+  if(d.life<=0){S.remove(b);b.material.dispose();bits.splice(i,1)}}
+ R.render(S,cam)}
+loop();
+setTimeout(function(){burst(new THREE.Vector3(0,3,1),120)},600);
+})();
+</script>
+</body>
+</html>
