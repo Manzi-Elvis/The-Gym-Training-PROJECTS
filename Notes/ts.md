@@ -216,7 +216,8 @@
 - 🔢 **10. Enums**
   - ```ts
     enum Role { Admin = "admin", User = "user" }
-   ```
+    ```
+    
   - `const enum` has special compile behavior, so know the trade-offs first
   - 🥊 **Enum vs union literal**
     - Enums exist at runtime 🏃
