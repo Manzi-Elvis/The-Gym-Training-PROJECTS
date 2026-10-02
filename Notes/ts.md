@@ -1,645 +1,451 @@
-> **How to use these notes**
->     For every concept: **Understand the idea → See the JavaScript equivalent → Write the TypeScript → Explain it aloud → Practice it.**
->     A strong TypeScript developer knows what TypeScript protects you from, what happens at runtime, and how the type system models the program.
+# 🟦 TypeScript: From JS Dev to TS Pro
 
-> **TypeScript Fundamentals**
->     > What is TypeScript
->         TypeScript is a **statically typed superset of JavaScript** that adds a type system and better tooling. It is transformed into JavaScript before running, because browsers and Node.js only execute JavaScript.
->         Mental model: JavaScript lets you discover problems while running. TypeScript lets the compiler warn you before running.
->         ```ts
->         function add(a: number, b: number): number {
->             return a + b;
->         }
->         add("10", 20); // Error at compile time
->         ```
->         **Interview answer:** "TypeScript is a statically typed superset of JavaScript. It adds static typing, interfaces, generics and better tooling, and compiles to JavaScript, so types don't exist at runtime."
->     > TypeScript vs JavaScript
->         | JavaScript | TypeScript |
->         | --- | --- |
->         | Dynamically typed | Statically typed |
->         | Runs directly | Compiled/transformed first |
->         | Errors surface at runtime | Many errors caught before running |
->         | `.js` | `.ts` / `.tsx` |
->         TypeScript does **not** make JavaScript runtime-safe. Types are erased, so untrusted data still needs runtime validation.
->     > Why TypeScript
->         Catches mistakes early, gives better autocomplete, makes refactoring safer, documents function contracts, and helps large teams work together.
->         **Interview answer:** "It moves many classes of errors from runtime to development time and improves tooling, documentation and refactoring."
->     > Static vs dynamic typing
->         Dynamic (JS): a variable can hold any type over time. Static (TS): the compiler knows what a variable should hold.
->         ```ts
->         let value: number = 10;
->         value = "hello"; // Error
->         ```
->         JavaScript itself stays dynamically typed at runtime. TypeScript only adds checking on top.
->     > Compile time vs runtime
->         **Compile time:** TypeScript analyzes your code and reports errors (`Type 'string' is not assignable to type 'number'`).
->         **Runtime:** the generated JavaScript executes. It knows nothing about your `interface User`.
->     > Type erasure
->         Type information is removed when TypeScript produces JavaScript.
->         ```ts
->         function greet(name: string): string { return `Hello ${name}`; }
->         ```
->         becomes
->         ```js
->         function greet(name) { return `Hello ${name}`; }
->         ```
->         **Critical lesson:** `type User = { name: string }` does not validate incoming data.
->     > .ts vs .tsx
->         `.ts` is normal TypeScript. `.tsx` is TypeScript plus JSX, used for React components.
->     > Compiler and setup
->         ```bash
->         npm install -D typescript     # or: pnpm add -D typescript
->         npx tsc --init                # create tsconfig.json
->         npx tsc                       # compile
->         npx tsc --noEmit              # type-check only (great for CI)
->         ```
->         ```json
->         { "scripts": { "build": "tsc", "check": "tsc --noEmit" } }
->         ```
->         Typical layout: `src/index.ts` → `dist/index.js` → `node dist/index.js`.
+> 🧭 **The loop for every concept:** Understand it → See the JS version → Write the TS → Explain it out loud → Practice it.
+> 🎯 **The real goal:** know *what TS protects you from*, *what survives to runtime*, and *how types model your program*.
 
-> **Type System Fundamentals**
->     > Basic types
->         ```ts
->         let name: string = "Elvis";
->         let age: number = 25;          // no separate int/float
->         let ok: boolean = true;
->         let big: bigint = 123n;
->         let id: symbol = Symbol("id");
->         let a: null = null;            // intentional absence
->         let b: undefined = undefined;  // not assigned / not provided
->         ```
->     > Type inference
->         TypeScript works out types automatically: `const age = 25` is `number`, `[10, 20]` is `number[]`.
->         **Rule:** don't annotate everything, and don't rely on inference everywhere. Annotate where the type communicates an important contract (function parameters, public APIs).
->     > Arrays
->         ```ts
->         const names: string[] = ["Elvis", "Jane"];
->         const users: Array<User> = [];            // equivalent syntax
->         const matrix: number[][] = [[1, 2], [3, 4]];
->         const nums: readonly number[] = [1, 2];   // push() is an error
->         ```
->         Use `readonly` for inputs a function must not modify.
->     > Tuples
->         A tuple is a fixed-position structure.
->         ```ts
->         const user: [string, number] = ["Elvis", 25];
->         type Maybe = [string, number?];                 // optional element
->         const point: readonly [number, number] = [10, 20];
->         ```
->         **Array = collection of similar values. Tuple = fixed-position structure.**
->     > Object types
->         ```ts
->         type User = {
->             readonly id: number;   // cannot be reassigned
->             name: string;
->             age?: number;          // optional
->         };
->         ```
+---
 
-> **Functions**
->     > Parameters and return types
->         ```ts
->         function add(a: number, b: number): number { return a + b; }
->         ```
->         Return types can be inferred, but explicit ones are useful on important APIs.
->     > Optional, default and rest parameters
->         ```ts
->         function greet(name: string, title?: string) {}          // title: string | undefined
->         function hello(name: string, greeting = "Hello") {}
->         function sum(...nums: number[]): number { return nums.reduce((t, n) => t + n, 0); }
->         ```
->     > Function types and callbacks
->         ```ts
->         type MathOp = (a: number, b: number) => number;
->         const add: MathOp = (a, b) => a + b;
->
->         function processUser(name: string, cb: (name: string) => void) { cb(name); }
->         ```
->     > void
->         `void` means the return value isn't meant to be used. It doesn't mean "nothing exists".
->     > Function overloads
->         Multiple callable signatures for one implementation.
->         ```ts
->         function format(value: string): string;
->         function format(value: number): string;
->         function format(value: string | number): string { return String(value); }
->         ```
->         The implementation signature isn't visible to callers. If all inputs behave the same, a union is simpler. Use overloads when different inputs produce meaningfully different types.
->         ```ts
->         function createElement(tag: "div"): HTMLDivElement;
->         function createElement(tag: "button"): HTMLButtonElement;
->         function createElement(tag: string): HTMLElement { return document.createElement(tag); }
->         ```
+- 🚀 **1. TypeScript Fundamentals**
+  - 🤔 **What is TypeScript?**
+    - JavaScript **+ a safety net** 🕸️
+    - A *superset* of JS: all valid JS is valid TS
+    - Gets turned into plain JS before running (browsers and Node only speak JS)
+    - 🧠 **Mental model**
+      - JS: "run it and find out what breaks" 💥
+      - TS: "the compiler warns you first" 🚨
+    - ```ts
+      function add(a: number, b: number): number {
+        return a + b;
+      }
+      add("10", 20); // ❌ caught before running
+      ```
+    - 🎤 **Say it in an interview:** "A statically typed superset of JavaScript that adds types, interfaces, generics and tooling, then compiles to JS. Types don't exist at runtime."
+  - ⚔️ **TypeScript vs JavaScript**
+    - JS: dynamic, runs directly, errors show up at runtime
+    - TS: static, gets compiled, many errors caught early
+    - ⚠️ **TS does NOT make runtime safe.** Types are erased.
+  - 💪 **Why bother?**
+    - Early bug catching 🐛
+    - Autocomplete that actually knows things ✨
+    - Fearless refactoring 🔧
+    - Code that documents itself 📖
+  - ⏱️ **Compile time vs runtime**
+    - 🏗️ *Compile time:* TS reads your code and complains
+    - 🏃 *Runtime:* JS runs, and it has **never heard of your `interface User`**
+  - 🧹 **Type erasure**
+    - TS types vanish in the output
+    - ```ts
+      function greet(name: string): string { return `Hi ${name}`; }
+      // becomes → function greet(name) { return `Hi ${name}`; }
+      ```
 
-> **Unions, Intersections & Literal Types**
->     > Union types (`|`)
->         "This **or** that", never "both".
->         ```ts
->         type ID = string | number;
->         ```
->     > Literal types
->         ```ts
->         type Direction = "up" | "down" | "left" | "right";
->         type StatusCode = 200 | 404 | 500;
->         type Theme = "light" | "dark" | "system";
->         ```
->         Prefer these over arbitrary `string` for fixed sets (status, role, theme, direction).
->     > Intersection types (`&`)
->         "This **and** that". Great for combining object shapes.
->         ```ts
->         type WithId = { id: string };
->         type WithTimestamps = { createdAt: Date; updatedAt: Date };
->         type Entity = WithId & WithTimestamps;
->         ```
->     > Union vs intersection
->         `A | B` = A OR B. `A & B` = A AND B.
+    - 🚨 `type User = { name: string }` does **not** validate incoming data
+  - 🛠️ **Setup cheat sheet**
+    - ```bash
+      npm install -D typescript
+      npx tsc --init        # make tsconfig.json
+      npx tsc               # compile
+      npx tsc --noEmit      # just check types (perfect for CI)
+      ```
+    - `.ts` = plain TS, `.tsx` = TS + JSX (React)
 
-> **Special Types**
->     > any
->         Disables type checking. Avoid unless truly necessary.
->     > unknown
->         "I don't know the type yet". You must narrow it before using it.
->         ```ts
->         let a: any = "hi";      a.doesNotExist();  // allowed (unsafe)
->         let b: unknown = "hi";  b.doesNotExist();  // error
->         ```
->         **Interview answer:** "`any` disables type checking; `unknown` must be narrowed before use. I prefer `unknown` when the type is genuinely unknown."
->     > never
->         A value that never successfully occurs: functions that always throw or never end.
->         ```ts
->         function fail(msg: string): never { throw new Error(msg); }
->         ```
->     > void vs never
->         `void`: returns, but the result isn't meant to be used. `never`: never returns normally.
->     > object
->         Any non-primitive value. Prefer describing the actual shape with a type or interface.
+- 🧱 **2. Type System Fundamentals**
+  - 🎒 **Basic types**
+    - `string`, `number` (no int/float split), `boolean`, `bigint` (`123n`), `symbol`
+    - `null` = "intentionally empty", `undefined` = "not set"
+  - 🔮 **Type inference** (TS is smart, let it work)
+    - `const age = 25` → TS already knows it's `number`
+    - 📏 **Rule:** annotate *contracts* (function params, public APIs), skip the obvious
+  - 📚 **Arrays**
+    - ```ts
+      const names: string[] = ["Elvis", "Jane"];
+      const grid: number[][] = [[1, 2], [3, 4]];
+      const locked: readonly number[] = [1, 2]; // push() ❌
+      ```
+  - 🎟️ **Tuples** (fixed-position arrays)
+    - ```ts
+      const user: [string, number] = ["Elvis", 25];
+      ```
+    - 🧠 **Array = a bag of similar things. Tuple = a fixed-slot form.**
+  - 📦 **Object shapes**
+    - ```ts
+      type User = {
+        readonly id: number;  // can't change
+        name: string;
+        age?: number;         // optional
+      };
+      ```
 
-> **Type Narrowing**
->     > What is narrowing
->         Reducing a broad type to a more specific one using information from the code.
->         ```ts
->         function print(value: string | number) {
->             if (typeof value === "string") value.toUpperCase(); // string
->             else value.toFixed(2);                              // number
->         }
->         ```
->     > Narrowing techniques
->         ```ts
->         typeof value === "string"      // primitives
->         animal instanceof Dog          // class instances
->         "bark" in animal               // property existence
->         value === null                 // equality
->         if (name) { ... }              // truthiness (careful: "", 0, false are falsy)
->         ```
->     > Control-flow narrowing
->         TypeScript follows your program's flow.
->         ```ts
->         function example(value: string | null) {
->             if (value === null) return;
->             console.log(value.length); // value is string here
->         }
->         ```
->     > Discriminated unions
->         A shared literal property lets TypeScript narrow the whole object.
->         ```ts
->         type State<T> =
->             | { status: "loading" }
->             | { status: "success"; data: T }
->             | { status: "error"; message: string };
->         ```
+- ⚡ **3. Functions**
+  - 🎛️ **Typed params and returns**
+    - ```ts
+      function add(a: number, b: number): number { return a + b; }
+      ```
+  - 🎚️ **Optional, default, rest**
+    - ```ts
+      function greet(name: string, title?: string) {}   // title: string | undefined
+      function hi(name: string, greeting = "Hello") {}
+      function sum(...nums: number[]) {}
+      ```
+  - 🔌 **Function types and callbacks**
+    - ```ts
+      type MathOp = (a: number, b: number) => number;
+      function run(cb: (name: string) => void) {}
+      ```
+  - 🕳️ **`void`** = "don't use my return value" (not "nothing exists")
+  - 🎭 **Overloads** (one function, several costumes)
 
-> **Type Guards and Predicates**
->     > Custom type guards
->         A runtime check that tells TypeScript how to narrow a type.
->         ```ts
->         function isUser(value: unknown): value is User {
->             return typeof value === "object" && value !== null && "name" in value;
->         }
->         ```
->     > `value is Type`
->         "If this function returns true, treat the value as this type."
->         ```ts
->         function isString(value: unknown): value is string {
->             return typeof value === "string";
->         }
->         ```
->         **Caution:** TypeScript trusts your guard. A wrong guard creates silent bugs.
->     > Type assertions (`as`)
->         "I know more than the compiler." This does **not** validate or convert anything.
->         ```ts
->         const input = document.querySelector("#email") as HTMLInputElement;
->         const user = JSON.parse(data) as User;      // dangerous: nothing is validated
->         const n = "123" as unknown as number;       // still a string at runtime!
->         const real = Number("123");                 // actual conversion
->         ```
->     > Non-null assertion (`!`)
->         `document.querySelector("#app")!` promises it isn't null. If you're wrong, it fails at runtime. Use sparingly.
+    - ```ts
+      function format(v: string): string;
+      function format(v: number): string;
+      function format(v: string | number): string { return String(v); }
+      ```
 
-> **Interfaces & Type Aliases**
->     > Type aliases
->         Name any type: objects, unions, functions, tuples.
->         ```ts
->         type ID = string | number;
->         type Calculator = (a: number, b: number) => number;
->         ```
->         Naming: describe the meaning (`CreateUserInput`, `ApiResponse`). Avoid `Data`, `Thing`, `Stuff`.
->     > Interfaces
->         Describe the structure of an object, including methods.
->         ```ts
->         interface User {
->             readonly id: number;
->             name: string;
->             age?: number;
->             greet(): string;
->         }
->         ```
->     > Extending and implementing
->         ```ts
->         interface Employee extends Person { employeeId: number }
->
->         class Dog implements Animal {
->             constructor(public name: string) {}
->             makeSound() { console.log("Woof"); }
->         }
->         ```
->     > Interface vs type
->         Both describe object shapes and overlap heavily. Use `interface` for extensible object/class contracts; use `type` for unions, intersections, tuples, primitives and complex compositions.
->         **Interview answer:** "Interfaces are great for extension and object-oriented contracts. Type aliases are more flexible because they can represent unions, intersections and tuples."
+    - 💡 If every input behaves the same, a plain union is simpler
 
-> **Object Type System**
->     > Nested objects
->         ```ts
->         type Address = { city: string; country: string };
->         type User = { name: string; address: Address };
->         ```
->     > Index signatures
->         For dynamic keys.
->         ```ts
->         type Scores = { [username: string]: number };
->         ```
->     > Structural typing
->         Compatibility depends on **shape**, not declared name.
->         ```ts
->         type User = { name: string };
->         const person = { name: "Elvis", age: 25 };
->         const user: User = person; // OK
->         ```
->     > Excess property checks
->         Fresh object literals are checked more strictly.
->         ```ts
->         const user: User = { name: "Elvis", age: 25 }; // Error: 'age' not in User
->         ```
->         **Interview answer:** "TypeScript uses structural typing. Excess property checks are an extra safeguard applied to object literals."
->     > Null and undefined handling
->         ```ts
->         let name: string = null;          // Error with strictNullChecks
->         let user: User | null = null;     // explicit
->         user?.address?.city               // optional chaining
->         const username = input ?? "Guest" // only for null/undefined (unlike ||)
->         ```
->         Prefer explicit checks over `!`.
+- 🔀 **4. Unions, Intersections & Literals**
+  - 🍕 **Union `|`** → "this **OR** that"
+    - `type ID = string | number`
+  - 🎯 **Literal types** → exact allowed values
+    - ```ts
+      type Direction = "up" | "down" | "left" | "right";
+      type Theme = "light" | "dark" | "system";
+      ```
+    - Better than a loose `string` for fixed sets
+  - 🧬 **Intersection `&`** → "this **AND** that"
+    - ```ts
+      type Entity = { id: string } & { createdAt: Date };
+      ```
+  - 🧠 `A | B` = either. `A & B` = both.
 
-> **Enums**
->     > Numeric and string enums
->         ```ts
->         enum Direction { Up, Down, Left, Right }
->         enum Role { Admin = "admin", User = "user" }
->         ```
->     > const enum
->         Special compilation behavior (inlined). Understand the implications before using it in libraries or complex build setups.
->     > Enum vs union literals
->         ```ts
->         type OrderStatus = "pending" | "paid" | "shipped";
->         ```
->         Often simpler than an enum. Enums exist at runtime; unions are type-only.
+- 🎩 **5. Special Types**
+  - 🕳️ **`any`** → turns the safety net **off** (avoid it)
+  - 🔒 **`unknown`** → "I don't know yet, so check first"
+    - ```ts
+      let a: any = "hi";     a.nope();  // ✅ allowed (scary)
+      let b: unknown = "hi"; b.nope();  // ❌ blocked (good)
+      ```
+    - 🎤 "I prefer `unknown` when I genuinely don't know the type."
+  - 💀 **`never`** → can't happen (always throws or never ends)
+    - ```ts
+      function fail(msg: string): never { throw new Error(msg); }
+     ```
+  - 🆚 **`void` vs `never`**
+    - `void`: returns, but ignore it
+    - `never`: never returns normally
 
-> **Generics**
->     > What are generics
->         Reusable code that preserves type information. `T` is a type placeholder: "whatever type the caller gives me".
->         ```ts
->         function identity<T>(value: T): T { return value; }
->         identity("Elvis"); // string
->         identity(25);      // number
->         ```
->     > Generic functions, inference and multiple parameters
->         ```ts
->         function first<T>(items: T[]): T | undefined { return items[0]; }
->         function pair<T, U>(a: T, b: U) { return [a, b] as const; }
->         ```
->         TypeScript usually infers `T` for you.
->     > Generic interfaces, aliases and classes
->         ```ts
->         interface ApiResponse<T> { success: boolean; data: T }
->         type Box<T> = { value: T };
->
->         class Storage<T> {
->             constructor(private value: T) {}
->             getValue(): T { return this.value; }
->         }
->         ```
->     > Generic constraints (`extends`)
->         ```ts
->         function getLength<T extends { length: number }>(value: T): number {
->             return value.length;
->         }
->         getLength("hello");  // OK
->         getLength(123);      // Error
->         ```
->     > Practical generics
->         ```ts
->         interface Repository<T> {
->             findById(id: number): Promise<T | null>;
->             save(entity: T): Promise<T>;
->         }
->         type ListProps<T> = { items: T[]; render: (item: T) => React.ReactNode };
->         ```
+- 🔍 **6. Type Narrowing**
+  - 🔦 **What it is:** shrinking a wide type into a specific one
+    - ```ts
+      function print(v: string | number) {
+        if (typeof v === "string") v.toUpperCase(); // string here
+        else v.toFixed(2);                          // number here
+      }
+      ```
+  - 🧰 **Your narrowing toolkit**
+    - `typeof` → primitives
+    - `instanceof` → classes
+    - `"bark" in animal` → property checks
+    - `=== null` → equality
+    - truthiness ⚠️ `""`, `0`, `false` are also falsy
+  - 🌊 **Control-flow narrowing:** TS follows your `if`/`return`
+    - ```ts
+      if (value === null) return;
+      value.length; // ✅ now it's a string
+      ```
+  - 🏷️ **Discriminated unions** (a shared "tag" does the narrowing for you)
+    - ```ts
+      type State<T> =
+        | { status: "loading" }
+        | { status: "success"; data: T }
+        | { status: "error"; message: string };
+      ```
 
-> **keyof**
->     > What is keyof
->         Produces a union of an object type's keys.
->         ```ts
->         type User = { name: string; age: number };
->         type UserKey = keyof User; // "name" | "age"
->         ```
->     > Safe property access
->         ```ts
->         function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
->             return obj[key];
->         }
->         getProperty(user, "name");   // string
->         getProperty(user, "email");  // Error
->         ```
+- 🛡️ **7. Type Guards & Assertions**
+  - 👮 **Custom type guard** (`value is Type`)
+    - ```ts
+      function isString(v: unknown): v is string {
+        return typeof v === "string";
+      }
+      ```
+    - ⚠️ TS trusts your guard, so a wrong one means silent bugs
+  - 🙏 **Assertions (`as`)** = "trust me, compiler"
+    - ```ts
+      const el = document.querySelector("#email") as HTMLInputElement; // ok
+      const user = JSON.parse(data) as User; // 😬 validates NOTHING
+      const n = "123" as unknown as number;  // still a string!
+      Number("123");                         // real conversion
+      ```
+    - `!` (non-null assertion) = "I swear it's not null". Use sparingly.
 
-> **Indexed Access Types**
->     > Basics
->         ```ts
->         type Name = User["name"];               // string
->         type Values = User[keyof User];         // string | number
->         type Users = { name: string }[];
->         type Single = Users[number];            // element type
->         ```
->     > `T[K]`
->         Extremely common in generic APIs (see `getProperty` above).
+- 🏷️ **8. Interfaces & Type Aliases**
+  - 📛 **Type alias:** a name for any type (objects, unions, functions, tuples)
+    - Name by *meaning*: `CreateUserInput` ✅, `Data` / `Stuff` ❌
+  - 📐 **Interface:** the blueprint of an object
+    - ```ts
+      interface User {
+        readonly id: number;
+        name: string;
+        age?: number;
+        greet(): string;
+      }
+      interface Employee extends User { employeeId: number }
+      class Dog implements Animal { /* ... */ }
+      ```
+  - ⚖️ **`interface` vs `type`**
+    - Both describe objects and overlap a lot
+    - `interface` → extensible object/class contracts
+    - `type` → unions, intersections, tuples, fancy combos
 
-> **typeof in TypeScript**
->     > JavaScript typeof vs TypeScript typeof
->         In expressions, `typeof "hi"` is a runtime operator that returns `"string"`. In type positions, `typeof` extracts the type of a value.
->         ```ts
->         const config = { host: "localhost", port: 3000 };
->         type Config = typeof config;
->         type ConfigKey = keyof typeof config; // "host" | "port"
->
->         function add(a: number, b: number) { return a + b; }
->         type AddFn = typeof add;
->         ```
+- 🏗️ **9. Object Type System**
+  - 🪆 **Nested shapes:** `type User = { address: Address }`
+  - 🗝️ **Index signatures** (dynamic keys): `{ [username: string]: number }`
+  - 🦆 **Structural typing** ("if it quacks like a `User`...")
+    - Compatibility = **shape**, not name
+    - ```ts
+      const person = { name: "Elvis", age: 25 };
+      const user: User = person; // ✅ has what User needs
+      ```
+  - 🚧 **Excess property checks:** fresh object literals get stricter treatment
+    - `const u: User = { name: "E", age: 25 }` ❌ ('age' not in User)
+  - 🕳️ **Null & undefined**
+    - Turn on `strictNullChecks`
+    - `user?.address?.city` → optional chaining
+    - `input ?? "Guest"` → only replaces `null`/`undefined` (unlike `||`)
 
-> **Utility Types**
->     > Object utilities
->         ```ts
->         Partial<User>            // all optional (great for updates)
->         Required<User>           // all required
->         Readonly<User>           // all readonly
->         Pick<User, "id" | "name">
->         Omit<User, "id">
->         Record<string, number>
->         ```
->     > Union utilities
->         ```ts
->         type Role = "admin" | "user" | "guest";
->         Exclude<Role, "admin">            // "user" | "guest"
->         Extract<Role, "admin" | "guest">  // "admin" | "guest"
->         NonNullable<string | null | undefined> // string
->         ```
->     > Function and class utilities
->         ```ts
->         ReturnType<typeof getUser>
->         Parameters<typeof createUser>   // [string, number]
->         InstanceType<typeof User>
->         Awaited<Promise<string>>        // string
->         ```
+- 🔢 **10. Enums**
+  - ```ts
+    enum Role { Admin = "admin", User = "user" }
+   ```
+  - `const enum` has special compile behavior, so know the trade-offs first
+  - 🥊 **Enum vs union literal**
+    - Enums exist at runtime 🏃
+    - `type Status = "pending" | "paid"` is type-only and usually simpler ✨
 
-> **Classes**
->     > Properties, constructors and methods
->         ```ts
->         class User {
->             constructor(public name: string, public readonly id: number) {}
->             greet(): string { return `Hello ${this.name}`; }
->         }
->         ```
->         Parameter properties (`public name` in the constructor) declare and assign in one step.
->     > Visibility
->         `public` (default): anywhere. `private`: inside the class. `protected`: class and subclasses. `readonly`: cannot be reassigned. `static`: belongs to the class itself.
->     > Getters and setters
->         ```ts
->         get fullName() { return `${this.first} ${this.last}`; }
->         set age(v: number) { if (v < 0) throw new Error("Invalid age"); this._age = v; }
->         ```
->     > Inheritance and abstract classes
->         ```ts
->         abstract class Animal {
->             abstract makeSound(): void;
->             move() { console.log("Moving"); }
->         }
->         class Dog extends Animal { makeSound() { console.log("Woof"); } }
->         ```
->         Abstract classes can't be instantiated. Subclasses must implement abstract members.
+- 🧪 **11. Generics** (types with a "fill in later" slot)
+  - 🎁 **The idea:** `T` = "whatever type the caller gives me"
+    - ```ts
+      function identity<T>(value: T): T { return value; }
+      identity("Elvis"); // string
+      identity(25);      // number
+      ```
+  - 🧩 **Where generics show up**
+    - Functions: `first<T>(items: T[]): T | undefined`
+    - Interfaces: `interface ApiResponse<T> { success: boolean; data: T }`
+    - Aliases: `type Box<T> = { value: T }`
+    - Classes: `class Storage<T> { constructor(private v: T) {} }`
+  - 🚧 **Constraints (`extends`)**
+    - ```ts
+      function getLength<T extends { length: number }>(v: T) { return v.length; }
+      getLength("hi");  // ✅
+      getLength(123);   // ❌
+      ```
+  - 🌍 **Real life:** `Repository<T>`, `ApiResponse<T>`, `ListProps<T>` in React
 
-> **Modules**
->     > Import and export
->         ```ts
->         export function add(a: number, b: number) { return a + b; }
->         export default function App() {}
->         import { add } from "./math";
->         import App from "./App";
->         export { UserService } from "./UserService"; // re-export
->         ```
->     > Type-only imports and exports
->         ```ts
->         import type { User } from "./types";
->         export type User = { id: number; name: string };
->         ```
->     > ESM vs CommonJS
->         ESM: `import` / `export`. CommonJS: `require()` / `module.exports`. Modern Node projects can use ESM.
+- 🔑 **12. `keyof`**
+  - Gives a union of an object's keys
+    - ```ts
+      type UserKey = keyof User; // "name" | "age"
+      ```
+  - 🛡️ **Safe property access**
+    - ```ts
+      function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+        return obj[key];
+      }
+      getProperty(user, "email"); // ❌ doesn't exist
+      ```
 
-> **tsconfig.json**
->     > Key options
->         `target`: JS version to emit. `module`: module output/resolution. `lib`: available built-in APIs. `rootDir` / `outDir`: source and output folders. `strict`: strong type checking (highly recommended). `noImplicitAny`, `strictNullChecks`: part of strict. `sourceMap`: debugging. `declaration`: emit `.d.ts` (for libraries). `esModuleInterop`: CJS/ESM import compatibility. `paths`: import aliases (runtime support depends on your tooling). `noEmit`: type-check only.
->     > Recommended starting point
->         ```json
->         {
->           "compilerOptions": {
->             "target": "ES2022",
->             "module": "NodeNext",
->             "moduleResolution": "NodeNext",
->             "strict": true,
->             "noEmit": true,
->             "esModuleInterop": true,
->             "skipLibCheck": true
->           },
->           "include": ["src"]
->         }
->         ```
->         Adjust for Node, React, Next.js, NestJS or libraries.
+- 🎯 **13. Indexed Access Types**
+  - ```ts
+    type Name = User["name"];            // string
+    type Values = User[keyof User];      // string | number
+    type Item = Users[number];           // array element type
+    ```
+  - `T[K]` is the star of generic APIs
 
-> **TypeScript + JavaScript**
->     > Migrating gradually
->         Convert one module at a time (`app.js` → `app.ts`). JSDoc can add types to JS files:
->         ```js
->         /** @param {number} a @param {number} b @returns {number} */
->         function add(a, b) { return a + b; }
->         ```
->     > @types and DefinitelyTyped
->         `npm install -D @types/node` adds types for JS packages. DefinitelyTyped is the community-maintained collection.
->     > Untyped libraries
->         Install `@types/...`, write your own declaration, wrap the library, use `unknown` and validate, or use `any` only as a last resort.
+- 🪞 **14. `typeof` in TypeScript**
+  - Two lives
+    - 🏃 *Runtime:* `typeof "hi"` → `"string"`
+    - 🏗️ *Type position:* grabs the type of a value
+  - ```ts
+    const config = { host: "localhost", port: 3000 };
+    type Config = typeof config;
+    type ConfigKey = keyof typeof config; // "host" | "port"
+      ```
 
-> **Declaration Files**
->     > .d.ts and declare
->         Describe types without implementation.
->         ```ts
->         declare function greet(name: string): string;
->         declare const API_URL: string;
->         ```
->     > Ambient and module declarations
->         ```ts
->         declare global { interface Window { myAppVersion: string } }
->         declare module "my-legacy-library" {
->             export function hello(name: string): string;
->         }
->         ```
+- 🧰 **15. Utility Types** (built-in type power tools)
+  - 🧱 **Objects**
+    - `Partial<T>` → everything optional (great for updates)
+    - `Required<T>` → everything required
+    - `Readonly<T>` → everything locked
+    - `Pick<T, K>` → keep only these keys
+    - `Omit<T, K>` → drop these keys
+    - `Record<K, V>` → dictionary
+  - 🍕 **Unions**
+    - `Exclude<T, U>` → remove members
+    - `Extract<T, U>` → keep matching members
+    - `NonNullable<T>` → drop `null` and `undefined`
+  - ⚙️ **Functions and more**
+    - `ReturnType<typeof fn>`, `Parameters<typeof fn>`
+    - `InstanceType<typeof Class>`
+    - `Awaited<Promise<string>>` → `string`
 
-> **Error Handling**
->     > try / catch with unknown
->         Caught errors are commonly `unknown` in strict setups.
->         ```ts
->         try { riskyOperation(); }
->         catch (error: unknown) {
->             if (error instanceof Error) console.error(error.message);
->         }
->         ```
->     > Safe helper and custom errors
->         ```ts
->         function getErrorMessage(error: unknown): string {
->             return error instanceof Error ? error.message : "Unknown error";
->         }
->
->         class NotFoundError extends Error {
->             constructor(message: string) { super(message); this.name = "NotFoundError"; }
->         }
->         ```
+- 🏛️ **16. Classes**
+  - ```ts
+    class User {
+      constructor(public name: string, public readonly id: number) {}
+      greet() { return `Hello ${this.name}`; }
+    }
+  ```
+  - 🚪 **Visibility:** `public` (anywhere) · `private` (class only) · `protected` (class + subclasses)
+  - ⚙️ **Extras:** `readonly`, `static`, getters/setters
+  - 🏗️ **Abstract classes:** can't be instantiated, subclasses must fill in the blanks
 
-> **Async TypeScript**
->     > Promise<T>
->         `Promise<User>` = a promise that eventually resolves to a `User`.
->         ```ts
->         async function getUser(): Promise<User> { ... }
->         ```
->     > Typed fetch
->         ```ts
->         async function fetchUsers(): Promise<User[]> {
->             const response = await fetch("/api/users");
->             return response.json(); // NOT validated
->         }
->         ```
->         The annotation doesn't validate the JSON.
+- 📦 **17. Modules**
+  - Named: `export const x` / `import { x } from "./a"`
+  - Default: `export default App` / `import App from "./App"`
+  - Re-export: `export { UserService } from "./UserService"`
+  - Types only: `import type { User } from "./types"`
+  - ESM (`import`/`export`) vs CommonJS (`require`/`module.exports`)
 
-> **TypeScript + APIs**
->     > Request, response, DTO and error types
->         ```ts
->         type CreateUserRequest = { name: string; email: string };
->         type ApiError = { message: string; code: string };
->         type PaginatedResponse<T> = { data: T[]; page: number; limit: number; total: number };
->         type ApiResponse<T> = { success: boolean; data: T; message?: string };
->         ```
->         DTO = Data Transfer Object, commonly used in NestJS for incoming request data.
->     > Runtime data vs TypeScript types
->         **TypeScript checks your code. Runtime validation checks external data.**
->         ```ts
->         const data: unknown = JSON.parse(json); // validate/narrow before trusting
->         ```
->         Validate: HTTP responses, user input, env variables, files, databases and third-party APIs.
->         ```
->         User input → HTTP request → JSON → Runtime validation → TypeScript model → Business logic
->         ```
+- ⚙️ **18. `tsconfig.json`**
+  - 🎛️ **Greatest hits**
+    - `target` → JS version out
+    - `module` / `moduleResolution` → how imports work
+    - `strict` → **turn this on** 🔥
+    - `outDir` / `rootDir` → where stuff goes
+    - `noEmit` → check only
+    - `esModuleInterop`, `paths`, `sourceMap`, `declaration`, `lib`
+  - 🌱 **Solid starter**
+    - ```json
+      {
+        "compilerOptions": {
+          "target": "ES2022",
+          "module": "NodeNext",
+          "moduleResolution": "NodeNext",
+          "strict": true,
+          "noEmit": true,
+          "esModuleInterop": true,
+          "skipLibCheck": true
+        },
+        "include": ["src"]
+      }
+      ```
 
-> **Best Practices**
->     > Habits
->         Use `strict` mode. Prefer inference when obvious. Prefer `unknown` over `any`. Avoid unnecessary assertions. Model data accurately (no `data: any`). Keep types reusable and named meaningfully. Don't over-engineer types. Validate external data. Keep compile-time and runtime concerns separate.
->     > Separate layers
->         Different layers, different types: `DatabaseUser` → `User` → `UserResponse` → `UserViewModel`.
+- 🔗 **19. TS + JS Interop**
+  - 🐢 **Migrate gradually**, one file at a time (`.js` → `.ts`)
+  - 📝 JSDoc can add types to plain JS
+  - 📥 `npm i -D @types/node` → types for JS packages (via DefinitelyTyped)
+  - 🤷 **Untyped library?** Install `@types`, write a declaration, wrap it, use `unknown` + validate
 
-> **Practical Patterns**
->     > Result type
->         ```ts
->         type Result<T> =
->             | { success: true; data: T }
->             | { success: false; error: string };
->
->         const result = findUser();
->         if (result.success) console.log(result.data.name);
->         else console.error(result.error);
->         ```
->     > State, event and repository types
->         ```ts
->         type UserCreatedEvent = { type: "USER_CREATED"; userId: number };
->         interface UserRepository {
->             findById(id: number): Promise<User | null>;
->             create(data: CreateUserDto): Promise<User>;
->         }
->         ```
->         Also: config types, form types, DB models, and generic utilities like `groupBy<T, K extends keyof T>`.
+- 📄 **20. Declaration Files (`.d.ts`)**
+  - Types with no implementation
+    - ```ts
+      declare function greet(name: string): string;
+      declare module "legacy-lib" { export function hello(n: string): string }
+      declare global { interface Window { myAppVersion: string } }
+    ```
 
-> **Interview Fundamentals**
->     > Core answers
->         **TypeScript:** statically typed superset of JavaScript, types erased at runtime.
->         **Static vs dynamic:** types checked before execution vs during it.
->         **Compile time vs runtime:** analysis/transformation vs execution of generated JS.
->         **Inference:** determining a type without an explicit annotation.
->         **`never` vs `void`:** `void` = return value not meant to be used; `never` = never returns normally.
->         **Union vs intersection:** `|` = one of several; `&` = combines requirements.
->         **Enum vs union:** enums can exist at runtime; unions are type-only and often simpler.
->     > Intermediate answers
->         **Generics:** reusable code that preserves input/output type relationships.
->         **keyof:** union of an object type's property keys.
->         **typeof:** runtime operator in JS; extracts a value's type in TS type positions.
->         **Narrowing:** using control-flow info to reduce a broad type to a specific one.
->         **Type guard:** a runtime check that lets TypeScript narrow a type.
->         **Utility types:** built-in generic types that transform others (`Partial`, `Pick`, `Omit`, `Record`, `ReturnType`).
->         **Structural typing:** compatibility by shape rather than type name.
->         **Overloads:** multiple call signatures for one implementation.
->         **Declaration files:** `.d.ts` files describing types without implementation.
->         **Strict mode:** a collection of stronger checks; preferred for production.
+- 🧯 **21. Error Handling**
+  - Caught errors are `unknown`, so narrow them
+    - ```ts
+      try { risky(); }
+      catch (error: unknown) {
+        if (error instanceof Error) console.error(error.message);
+      }
+     ```
+  - 🛟 **Helper**
+    - ```ts
+      const getErrorMessage = (e: unknown) => e instanceof Error ? e.message : "Unknown error";
+     ```
+  - 🧨 **Custom errors:** `class NotFoundError extends Error { ... }`
 
-> **Practice & Revision**
->     > Exercises
->         Write typed functions (e.g. `calculateAverage`). Convert JS to TS. Build interfaces and reusable aliases. Model statuses with unions and handle every case. Practice narrowing with `boolean`, `null` and `undefined`. Implement `first<T>()`. Apply `Pick`, `Partial`, `Omit`, `Readonly` to a `User`. Type an API response. Practice React (props, state, events, refs, context, hooks), Node (`process.env`, fs, HTTP) and NestJS (controller, service, module, DTO, guard, pipe, interceptor).
->     > Questions to answer without notes
->         What is TypeScript? Why use it? What is type erasure? `any` vs `unknown`? What is `never`? Union vs intersection? What is narrowing? What is a type guard? Interface vs type? What are generics, `keyof`, `typeof`, indexed access, utility types, structural typing, overloads, declaration files, strict mode? Can TypeScript validate API JSON? Why is runtime validation still needed?
->     > Explain a concept without notes
->         Pick a topic (e.g. Generics) and explain: what it is, why it exists, what problem it solves, basic syntax, a practical example, when to use it and when to avoid it.
->     > Weak-area tracker
->         Rate each area (Basic types, Inference, Functions, Unions, Narrowing, Generics, Utility types, Modules, tsconfig, API typing) from 0 to 100% and focus your next session on the weakest.
+- ⏳ **22. Async TypeScript**
+  - `Promise<User>` = "a promise that eventually gives a `User`"
+  - ```ts
+    async function fetchUsers(): Promise<User[]> {
+      const res = await fetch("/api/users");
+      return res.json(); // ⚠️ NOT validated
+    }
+    ```
 
-> **The Big Picture**
->     > Mental model
->         ```
->         Source (.ts) → Type checking → Errors (fix) or Valid code → JavaScript → Runtime
->         ```
->         TypeScript types give compile-time protection. They do **not** replace runtime validation.
->     > Five core ideas
->         1. **Types describe values.**
->         2. **Inference reduces unnecessary annotations.**
->         3. **Unions model alternatives.**
->         4. **Generics preserve relationships** between input and output types.
->         5. **Narrowing makes broad types usable.**
->     > Suggested learning order
->         **Foundation:** Fundamentals, Basic Types, Arrays & Tuples, Objects, Functions, Type Aliases.
->         **Core type system:** Unions & Literals, Interfaces, Enums, Narrowing, Assertions, Generics, keyof/typeof, Indexed Access, Intersections.
->         **Type transformation:** Utility Types, Overloads, Classes, Compatibility, Null/Undefined.
->         **Project TypeScript:** Modules, tsconfig, JS → TS, Declaration Files, Error Handling, Async, APIs.
->         **Production habits:** Best Practices, Practical Patterns.
->         **Interview:** Fundamentals, Practice & Revision.
->     > What "good at TypeScript" means
->         Looking at `fetch(...).then(res => res.json())` and writing a typed `async function getUser(id: number): Promise<User>`, then remembering: *the type tells the compiler what I expect; it doesn't prove the server returned that structure.*
->         Aim for code that is correct, understandable, maintainable, reusable, safe, easy to refactor and easy to test.
+- 🌐 **23. TypeScript + APIs**
+  - 🧾 **Common types**
+    - ```ts
+      type ApiResponse<T> = { success: boolean; data: T; message?: string };
+      type PaginatedResponse<T> = { data: T[]; page: number; limit: number; total: number };
+    ```
+    - DTO = Data Transfer Object (NestJS loves these)
+  - 🚨 **Golden rule**
+    - **TypeScript checks your code. Runtime validation checks external data.**
+    - `const data: unknown = JSON.parse(json);` → validate, *then* trust
+    - Validate: HTTP responses, user input, env vars, files, DB results, third-party APIs
+    - 🌊 `User input → HTTP → JSON → validation → TS model → business logic`
+
+- ✅ **24. Best Practices**
+  - 🔒 Use `strict`
+  - 🔮 Infer when it's obvious
+  - 🙅 No casual `any`, prefer `unknown`
+  - 🙏 Fewer assertions
+  - 🎯 Model data accurately (no `data: any`)
+  - ♻️ Reusable, well-named types
+  - 🧘 Don't over-engineer
+  - 🪜 Separate layers: `DatabaseUser` → `User` → `UserResponse` → `UserViewModel`
+
+- 🧙 **25. Practical Patterns**
+  - 🎁 **Result type**
+    - ```ts
+      type Result<T> =
+        | { success: true; data: T }
+        | { success: false; error: string };
+     ```
+  - 📡 **Event type:** `{ type: "USER_CREATED"; userId: number }`
+  - 🗄️ **Repository:** `findById(id): Promise<User | null>`
+  - Also: config types, form types, DB models, generic helpers like `groupBy<T, K extends keyof T>`
+
+- 🎤 **26. Interview Cheat Sheet**
+  - 🟢 **Basics**
+    - **TypeScript:** typed superset of JS, types erased at runtime
+    - **Static vs dynamic:** checked before vs during execution
+    - **Inference:** TS figures out the type without annotation
+    - **Union vs intersection:** one of vs all of
+    - **Enum vs union:** runtime object vs type-only
+  - 🟡 **Intermediate**
+    - **Generics:** reusable code that keeps input/output types linked
+    - **keyof:** union of an object's keys
+    - **typeof:** runtime operator in JS, type extractor in TS
+    - **Narrowing:** TS uses control flow to get more specific
+    - **Type guard:** runtime check TS can learn from
+    - **Utility types:** built-in type transformers
+    - **Structural typing:** shape over name
+    - **Overloads:** multiple signatures, one implementation
+    - **`.d.ts`:** types without implementation
+    - **Strict mode:** stronger checks, preferred in production
+
+- 🏋️ **27. Practice Gym**
+  - 💪 **Reps**
+    - Convert JS to TS
+    - Handle every case in a union
+    - Write `first<T>()`
+    - Apply `Pick` / `Partial` / `Omit` / `Readonly` to a `User`
+    - Type an API response
+    - Type React props, state, events and hooks
+    - Type Node `process.env`
+    - Build a NestJS CRUD with DTOs
+  - 🧠 **Explain-it test**
+    - Pick a topic and explain: what it is → why it exists → the problem it solves → syntax → example → when to use → when to avoid
+  - 📊 **Weak-spot tracker**
+    - Rate each area 0 to 100%, then attack the lowest ones first
+
+- 🧠 **The Big Picture**
+  - 🗺️ `.ts source → type check → ❌ fix / ✅ JavaScript → runtime`
+  - Types protect **compile time**. Validation protects **runtime**.
+  - 🖐️ **The five ideas to never forget**
+    - 1️⃣ Types describe values
+    - 2️⃣ Inference cuts the noise
+    - 3️⃣ Unions model alternatives
+    - 4️⃣ Generics keep relationships intact
+    - 5️⃣ Narrowing makes wide types usable
+  - 🏆 **"Good at TS" means**
+    - Writing `Promise<User>` and *still* remembering: "the type says what I **expect**, not what the server **sent**"
+    - Code that's correct, readable, maintainable, reusable, safe and easy to refactor
