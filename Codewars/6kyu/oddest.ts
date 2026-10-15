@@ -24,11 +24,11 @@ How odd is -1 ?
 */
 
 function oddness(n: number) : number {
-  n = Math.abs(n);
-  let score = 0
-  while(n % 2 === 1){
+  let score = 0;
+  while(n % 2 !== 0){
     score++;
-    n = Math.floor(n / 2)
+    if(n === -1) return Infinity;
+    n =  (n - 1) / 2;
   }
   return score;
 }
