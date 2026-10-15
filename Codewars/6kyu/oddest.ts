@@ -39,3 +39,17 @@ export function oddest(a: number[]): number | null {
   const oddestNum = a.filter((curr, i ) => scores[i] === highest)
   return oddestNum.length === 1 ? oddestNum[0] : null;
 }
+
+// EXPLANATION:
+
+/*
+The code works by first defining an oddness() function that calculates how odd
+a number is by repeatedly checking whether it is odd using n % 2 !== 0, increasing
+the score each time, and transforming the number into (n - 1) / 2 until it becomes
+even; if the number reaches -1, it returns Infinity because applying the transformation
+would keep it at -1 forever. The oddest() function then checks whether the input array is
+empty and returns null if it is; otherwise, it uses map() to calculate the oddness score
+of every number, Math.max(...scores) to find the highest score, and filter() to collect
+all numbers whose scores equal that maximum. Finally, it returns the number if exactly
+one number has the highest score, or null if multiple numbers tie for the highest score.
+*/
