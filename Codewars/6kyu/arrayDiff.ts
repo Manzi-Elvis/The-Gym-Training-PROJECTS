@@ -12,3 +12,4 @@ If a = [1, 2, 2, 2, 3] and b = [2], the result should be [1, 3].
 */
 
 export const arrayDiff = (a: number[], b: number[]): number[] => a.filter(x => !b.includes(x))
+console.log(arrayDiff([1, 2, 3, 4], [1, 2]));
