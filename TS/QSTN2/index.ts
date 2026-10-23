@@ -12,7 +12,7 @@ const row: [string, number] = ["Bob", 25];
 console.log(row[1]);
 row.push("extra");
 const xs: string[] = ["a"];
-console.log(xs[5].toUpperCase());
+console.log(xs[5]?.toUpperCase());
 
 /////////////ORIGINAL CODE WITH BUGS
 /*
