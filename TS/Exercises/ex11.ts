@@ -5,7 +5,18 @@ import {
     strRandomize,
     strInvertCase
 } from 'str-utils';
-/////////   npm install str-utils
+/*
+File: index.d.ts
+declare module 'str-utils' {
+    type StringFunction = (input: string) => string;
+
+    export const strReverse: StringFunction;
+    export const strToLower: StringFunction;
+    export const strToUpper: StringFunction;
+    export const strRandomize: StringFunction;
+    export const strInvertCase: StringFunction;
+}
+*/
 /*
 
 Intro:
